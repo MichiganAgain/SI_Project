@@ -36,6 +36,17 @@ class CategoryService implements CategoryServiceInterface
         $this->categoryRepository->save($category);
     }
 
+    public function delete(Category $category): bool
+    {
+        if($this->canBeDeleted($category)){
+            $this->categoryRepository->delete($category);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     /**
      * Can Category be deleted?
      *

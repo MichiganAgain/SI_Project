@@ -20,6 +20,8 @@
             <dd>{{  post.content }}</dd>
             <dt>{{ 'label.category'|trans }}</dt>
             <dd>{{  post.category.title }}</dd>
+            <dt>{{ 'label.author'|trans }}</dt>
+            <dd>{{ post.author.username }}</dd>
         </dl>
         <p>
             <a href="{{ url('post_index') }}" title="{{ 'action.back_to_list'|trans }}">

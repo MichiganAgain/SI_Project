@@ -10,6 +10,7 @@ use App\Entity\User;
 use App\Repository\PostRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Security\Core\Security;
 
 
 /**
@@ -28,16 +29,19 @@ class PostService implements PostServiceInterface
      */
     private PaginatorInterface $paginator;
 
+    private $security;
+
     /**
      * Constructor.
      *
      * @param PostRepository     $postRepository Post repository
      * @param PaginatorInterface $paginator      Paginator
      */
-    public function __construct(PostRepository $postRepository, PaginatorInterface $paginator)
+    public function __construct(PostRepository $postRepository, PaginatorInterface $paginator, Security $security)
     {
         $this->postRepository = $postRepository;
         $this->paginator = $paginator;
+        $this->security = $security;
     }
 
     /**
@@ -50,11 +54,22 @@ class PostService implements PostServiceInterface
      */
     public function getPaginatedList(int $page, User $author): PaginationInterface
     {
-        return $this->paginator->paginate(
-            $this->postRepository->queryByAuthor($author),
-            $page,
-            PostRepository::PAGINATOR_ITEMS_PER_PAGE
-        );
+        if($this->security->isGranted('ROLE_ADMIN')){
+            return $this->paginator->paginate(
+
+                $this->postRepository->queryAll(),
+                $page,
+                PostRepository::PAGINATOR_ITEMS_PER_PAGE
+            );
+        }else{
+            return $this->paginator->paginate(
+
+                $this->postRepository->queryByAuthor($author),
+                $page,
+                PostRepository::PAGINATOR_ITEMS_PER_PAGE
+            );
+        }
+
     }
 
     /**

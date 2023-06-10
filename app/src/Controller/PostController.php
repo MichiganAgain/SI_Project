@@ -10,6 +10,7 @@ use App\Entity\User;
 use App\Form\Type\PostType;
 use App\Service\PostService;
 use App\Service\PostServiceInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use App\Repository\PostRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -90,16 +91,17 @@ class PostController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET'
     )]
+    #[IsGranted('VIEW', subject: 'post')]
     public function show(Post $post): Response
     {
-        if ($post->getAuthor() !== $this->getUser()) {
-            $this->addFlash(
-                'warning',
-                $this->translator->trans('message.record_not_found')
-            );
-
-            return $this->redirectToRoute('post_index');
-        }
+//        if ($post->getAuthor() !== $this->getUser()) {
+//            $this->addFlash(
+//                'warning',
+//                $this->translator->trans('message.record_not_found')
+//            );
+//
+//            return $this->redirectToRoute('post_index');
+//        }
 
         return $this->render(
             'post/show.html.twig',

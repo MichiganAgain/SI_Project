@@ -9,6 +9,7 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Security\Core\Security;
 
 /**
  *
@@ -19,11 +20,14 @@ class CategoryService implements CategoryServiceInterface
     private CategoryRepository $categoryRepository;
     private PostRepository $postRepository;
 
-    public function __construct(CategoryRepository $categoryRepository, PostRepository $postRepository, PaginatorInterface $paginator)
+    private $security;
+
+    public function __construct(CategoryRepository $categoryRepository, PostRepository $postRepository, PaginatorInterface $paginator, Security $security)
     {
         $this->categoryRepository = $categoryRepository;
         $this->postRepository = $postRepository;
         $this->paginator = $paginator;
+        $this->security = $security;
     }
 
     public function save(Category $category): void

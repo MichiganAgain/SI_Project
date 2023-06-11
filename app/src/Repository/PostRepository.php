@@ -85,6 +85,28 @@ class PostRepository extends ServiceEntityRepository
     }
 
     /**
+     * Count posts by category.
+     *
+     * @param User $user User
+     *
+     * @return int Number of posts in category
+     *
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+
+    public function countByUser(User $user): int
+    {
+        $qb = $this->getOrCreateQueryBuilder();
+
+        return $qb->select($qb->expr()->countDistinct('post.id'))
+            ->where('post.author = :user')
+            ->setParameter(':user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
      * Save entity.
      *
      * @param Post $post Post entity

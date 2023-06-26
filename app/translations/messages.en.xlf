@@ -72,6 +72,107 @@
                   <source>title.category_details</source>
                   <target>Category details #%id%</target>
               </trans-unit>
+      <trans-unit id="action_logout">
+              <source>action_logout</source>
+              <target>Log Out</target>
+      </trans-unit>
+      <trans-unit id="action_login">
+                    <source>action_login</source>
+                    <target>Log In</target>
+            </trans-unit>
+      <trans-unit id="action.category">
+                    <source>action.category</source>
+                    <target>Categories</target>
+            </trans-unit>
+      <trans-unit id="action.post">
+                          <source>action.post</source>
+                          <target>Posts</target>
+                  </trans-unit>
+      <trans-unit id="action.create_post">
+                                <source>action.create_post</source>
+                                <target>Create Post</target>
+                        </trans-unit>
+      <trans-unit id="action.create_category">
+                                <source>action.create_category</source>
+                                <target>Create Category</target>
+                        </trans-unit>
+      <trans-unit id="label.author">
+                     <source>label.author</source>
+                     <target>Author</target>
+      </trans-unit>
+      <trans-unit id="action.edit">
+                           <source>action.edit</source>
+                           <target>Edit</target>
+       </trans-unit>
+       <trans-unit id="action.delete">
+                            <source>action.delete</source>
+                            <target>Delete</target>
+             </trans-unit>
+       <trans-unit id="action.save">
+                                   <source>action.save</source>
+                                   <target>Save</target>
+                    </trans-unit>
+        <trans-unit id="title.post_create">
+               <source>title.post_create</source>
+               <target>Create a Post</target>
+        </trans-unit>
+        <trans-unit id="title.category_create">
+                       <source>title.category_create</source>
+                       <target>Create a Category</target>
+                </trans-unit>
+        <trans-unit id="label.none">
+                               <source>label.none</source>
+                               <target>Select an item</target>
+        </trans-unit>
+        <trans-unit id="action.signin">
+                                       <source>action.signin</source>
+                                       <target>Sign In</target>
+                </trans-unit>
+        <trans-unit id="action.email">
+                                       <source>action.email</source>
+                                       <target>Email</target>
+                </trans-unit>
+       <trans-unit id="action.password">
+                                      <source>action.password</source>
+                                      <target>Password</target>
+               </trans-unit>
+       <trans-unit id="action_hello">
+                                             <source>action_hello</source>
+                                             <target>Hello</target>
+                      </trans-unit>
+       <trans-unit id="message.form_error">
+                                                    <source>message.form_error</source>
+                                                    <target>Error</target>
+                             </trans-unit>
+       <trans-unit id="message.not_deleted">
+                                                    <source>message.not_deleted</source>
+                                                    <target>Object was not deleted!</target>
+                             </trans-unit>
+       <trans-unit id="message.created_successfully">
+                                                           <source>message.created_successfully</source>
+                                                           <target>Object Created!</target>
+       </trans-unit>
+       <trans-unit id="message.deleted_successfully">
+                                                                  <source>message.deleted_successfully</source>
+                                                                  <target>Object Deleted!</target>
+              </trans-unit>
+        <trans-unit id="title.category_delete">
+                                                                   <source>title.category_delete</source>
+                                                                   <target>Are you sure?</target>
+        </trans-unit>
+        <trans-unit id="title.category_edit">
+                                                                           <source>title.category_edit</source>
+                                                                           <target>Edit this category</target>
+                </trans-unit>
+        <trans-unit id="title.post_edit">
+                                                                                   <source>title.post_edit</source>
+                                                                                   <target>Edit this post</target>
+                        </trans-unit>
+        <trans-unit id="title.post_delete">
+                                                                           <source>title.post_delete</source>
+                                                                           <target>Are you sure?</target>
+                </trans-unit>
+
     </body>
   </file>
 </xliff>

@@ -5,22 +5,79 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title.category_list'|trans }}</h1>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark container-fluid mb-4">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="navbar-brand" >{{ 'action_hello'|trans }} {{ app.user.username }}!</div>
+        {% endif %}
+
+        <div>
+            <ul class="navbar-nav">
+
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {#                <li class="nav-item">#}
+                    {#                    Hello: {{ app.user.username }} !#}
+                    {#                </li>#}
+                    <li>
+                        <div>
+                            <a class="nav-link" href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li>
+                        <div>
+                            <a class="nav-link" href="{{ url('app_login') }}">{{ 'action_login'|trans }}</a>
+                        </div>
+                    </li>
+                {% endif %}
+
+                {% if is_granted('MANAGE')  %}
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="{{ url('category_index') }}" title="{{ 'action.category'|trans }}">
+                            {{ 'action.category'|trans }}
+                        </a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('post_index') }}" title="{{ 'action.post'|trans }}">
+                        {{ 'action.post'|trans }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('post_create') }}" title="{{ 'action.create_post'|trans }}">
+                        {{ 'action.create_post'|trans }}
+                    </a>
+                </li>
+                {% if is_granted('MANAGE')  %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('category_create') }}" title="{{ 'action.create_category'|trans }}">
+                            {{ 'action.create_category'|trans }}
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+
+    <h1 class="text-danger">{{ 'title.category_list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
 
-        <div class="navigation text-center">
+        <div class="navigation text-center text-danger">
             {{ knp_pagination_render(pagination) }}
         </div>
 
-        <a href="{{ url('category_create') }}" title="{{ 'action.create'|trans }}">
-            {{ 'action.create'|trans }}
-        </a>
 
-        <a href="{{ url('post_index') }}" title="{{ 'action.post'|trans }}">
-            {{ 'action.post'|trans }}
-        </a>
 
-        <table class="table table-striped">
+{#        <a href="{{ url('category_create') }}" title="{{ 'action.create'|trans }}">#}
+{#            {{ 'action.create'|trans }}#}
+{#        </a>#}
+
+{#        <a href="{{ url('post_index') }}" title="{{ 'action.post'|trans }}">#}
+{#            {{ 'action.post'|trans }}#}
+{#        </a>#}
+
+        <table class="table table-striped text-danger">
             <thead>
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'category.id') }}</th>
@@ -37,11 +94,11 @@
                     <td>{{ category.createdAt|format_date('long') }}</td>
                     <td>{{ category.updatedAt|format_date('long') }}</td>
                     <td>{{ category.title }}</td>
-                    <td>
-                        <a href="{{ url('category_show', {id: category.id}) }}" title="{{ 'action.show'|trans }}">
-                            {{ 'action.show'|trans }}
-                        </a>
-                    </td>
+{#                    <td>#}
+{#                        <a href="{{ url('category_show', {id: category.id}) }}" title="{{ 'action.show'|trans }}">#}
+{#                            {{ 'action.show'|trans }}#}
+{#                        </a>#}
+{#                    </td>#}
                     <td>{% if is_granted('VIEW', category)  %}
                             <a class="btn btn-outline-primary" href="{{ url('category_show', {id: category.id}) }}" title="{{ 'action.show'|trans }}">
                                 {{ 'action.show'|trans }}

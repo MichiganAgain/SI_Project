@@ -19,6 +19,12 @@ use Symfony\Component\Security\Core\Security;
 class PostService implements PostServiceInterface
 
 {
+
+    /**
+     * Category service.
+     */
+    private CategoryServiceInterface $categoryService;
+
     /**
      * Post repository.
      */
@@ -29,6 +35,7 @@ class PostService implements PostServiceInterface
      */
     private PaginatorInterface $paginator;
 
+
     private $security;
 
     /**
@@ -37,8 +44,9 @@ class PostService implements PostServiceInterface
      * @param PostRepository     $postRepository Post repository
      * @param PaginatorInterface $paginator      Paginator
      */
-    public function __construct(PostRepository $postRepository, PaginatorInterface $paginator, Security $security)
+    public function __construct(CategoryServiceInterface $categoryService, PostRepository $postRepository, PaginatorInterface $paginator, Security $security)
     {
+        $this->categoryService = $categoryService;
         $this->postRepository = $postRepository;
         $this->paginator = $paginator;
         $this->security = $security;
@@ -52,19 +60,21 @@ class PostService implements PostServiceInterface
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page, User $author): PaginationInterface
+    public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface
     {
+        $filters = $this->prepareFilters($filters);
+
         if($this->security->isGranted('ROLE_ADMIN')){
             return $this->paginator->paginate(
 
-                $this->postRepository->queryAll(),
+                $this->postRepository->queryAll($filters),
                 $page,
                 PostRepository::PAGINATOR_ITEMS_PER_PAGE
             );
         }else{
             return $this->paginator->paginate(
 
-                $this->postRepository->queryByAuthor($author),
+                $this->postRepository->queryByAuthor($author, $filters),
                 $page,
                 PostRepository::PAGINATOR_ITEMS_PER_PAGE
             );
@@ -90,5 +100,25 @@ class PostService implements PostServiceInterface
     public function delete(Post $post): void
     {
         $this->postRepository->delete($post);
+    }
+
+    /**
+     * Prepare filters for the tasks list.
+     *
+     * @param array<string, int> $filters Raw filters from request
+     *
+     * @return array<string, object> Result array of filters
+     */
+    private function prepareFilters(array $filters): array
+    {
+        $resultFilters = [];
+        if (!empty($filters['category_id'])) {
+            $category = $this->categoryService->findOneById($filters['category_id']);
+            if (null !== $category) {
+                $resultFilters['category'] = $category;
+            }
+        }
+
+        return $resultFilters;
     }
 }

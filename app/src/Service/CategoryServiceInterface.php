@@ -17,4 +17,5 @@ interface CategoryServiceInterface
      */
     public function canBeDeleted(Category $category): bool;
     public function delete(Category $category): bool;
+    public function findOneById(int $id): ?Category;
 }

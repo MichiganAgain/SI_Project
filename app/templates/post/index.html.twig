@@ -20,6 +20,9 @@
             {{ 'action.category'|trans }}
         </a>
 
+
+
+
         <table class="table table-striped">
             <thead>
             <tr>
@@ -41,8 +44,15 @@
                     <td>{{ post.updatedAt|format_date('long') }}</td>
                     <td>{{ post.title }}</td>
                     <td>{{ post.content }}</td>
-                    <td>{{ post.category.title }}</td>
+{#                    <td>{{ post.category.title }}</td>#}
+                    <td>
+                        <a href="{{ url('post_index', {'filters.category_id' : post.category.id}) }}" title="{{ post.category.title }}">
+                            {{ post.category.title }}
+                        </a>
+
+                    </td>
                     <td>{{ post.author.username }}</td>
+
                     <td>
                         <a href="{{ url('post_show', {id: post.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}

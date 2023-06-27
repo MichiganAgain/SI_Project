@@ -119,9 +119,9 @@ class CategoryVoter extends Voter
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        } else {
-            return $category->getAuthor() === $user;
         }
+
+        return $category->getAuthor() === $user;
     }
 
     /**
@@ -136,9 +136,9 @@ class CategoryVoter extends Voter
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        } else {
-            return $category->getAuthor() === $user;
         }
+
+        return $category->getAuthor() === $user;
     }
 
     /**
@@ -153,9 +153,9 @@ class CategoryVoter extends Voter
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        } else {
-            return $category->getAuthor() === $user;
         }
+
+        return $category->getAuthor() === $user;
     }
 
     /**

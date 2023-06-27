@@ -117,9 +117,10 @@ class UserVoter extends Voter
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        } else {
-            return $user->getUsername() == $user;
         }
+
+//        return $user->getUsername() == $user;
+        return $user->getUsername() === $this->security->getUser()->getUsername();
     }
 
     /**
@@ -133,9 +134,10 @@ class UserVoter extends Voter
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        } else {
-            return $user->getUsername() == $user;
         }
+
+//        return $user->getUsername() == $user;
+        return $user->getUsername() === $this->security->getUser()->getUsername();
     }
 
     /**
@@ -149,9 +151,10 @@ class UserVoter extends Voter
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        } else {
-            return $user->getUsername() == $user;
         }
+
+//        return $user->getUsername() == $user;
+        return $user->getUsername() === $this->security->getUser()->getUsername();
     }
 
     /**

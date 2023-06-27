@@ -50,7 +50,7 @@ class CategoryService implements CategoryServiceInterface
      */
     public function save(Category $category): void
     {
-        if (null == $category->getId()) {
+        if (null === $category->getId()) {
             $category->setCreatedAt(new \DateTimeImmutable());
         }
         $category->setUpdatedAt(new \DateTimeImmutable());
@@ -71,9 +71,9 @@ class CategoryService implements CategoryServiceInterface
             $this->categoryRepository->delete($category);
 
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

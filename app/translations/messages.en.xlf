@@ -216,6 +216,11 @@
                                                                                                              <source>user.not_deleted</source>
                                                                                                              <target>User was not deleted!</target>
                                    </trans-unit>
+       <trans-unit id="message.edited_successfully ">
+                                                                                                                    <source>message.edited_successfully </source>
+                                                                                                                    <target>Message Edited!</target>
+                                          </trans-unit>
+
 
 
     </body>

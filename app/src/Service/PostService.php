@@ -72,13 +72,13 @@ class PostService implements PostServiceInterface
                 $page,
                 PostRepository::PAGINATOR_ITEMS_PER_PAGE
             );
-        } else {
-            return $this->paginator->paginate(
-                $this->postRepository->queryByAuthor($author, $filters),
-                $page,
-                PostRepository::PAGINATOR_ITEMS_PER_PAGE
-            );
         }
+
+        return $this->paginator->paginate(
+            $this->postRepository->queryByAuthor($author, $filters),
+            $page,
+            PostRepository::PAGINATOR_ITEMS_PER_PAGE
+        );
     }
 
     /**

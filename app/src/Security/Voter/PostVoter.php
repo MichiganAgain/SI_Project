@@ -110,9 +110,9 @@ class PostVoter extends Voter
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        } else {
-            return $post->getAuthor() === $user;
         }
+
+        return $post->getAuthor() === $user;
     }
 
     /**
@@ -127,9 +127,9 @@ class PostVoter extends Voter
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        } else {
-            return $post->getAuthor() === $user;
         }
+
+        return $post->getAuthor() === $user;
     }
 
     /**
@@ -144,8 +144,8 @@ class PostVoter extends Voter
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        } else {
-            return $post->getAuthor() === $user;
         }
+
+        return $post->getAuthor() === $user;
     }
 }

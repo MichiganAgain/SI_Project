@@ -88,9 +88,9 @@ class UserService implements UserServiceInterface
             $this->userRepository->remove($user);
 
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

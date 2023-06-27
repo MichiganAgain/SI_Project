@@ -183,23 +183,19 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $deleteMessage = $this->categoryService->delete($category);
 
-            if($deleteMessage){
+            if ($deleteMessage) {
                 $this->addFlash(
                     'success',
                     $this->translator->trans('message.deleted_successfully')
                 );
-            }
-            else{
+            } else {
                 $this->addFlash(
                     'warning',
                     $this->translator->trans('message.not_deleted')
                 );
             }
-
-
 
             return $this->redirectToRoute('category_index');
         }
@@ -212,5 +208,4 @@ class CategoryController extends AbstractController
             ]
         );
     }
-
 }

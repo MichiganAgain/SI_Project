@@ -39,7 +39,8 @@ class UserType extends AbstractType
                 'label' => 'label.nickname',
                 'required' => true,
                 'attr' => ['max_length' => 255],
-            ]);
+            ]
+        );
         $builder->add(
             'email',
             TextType::class,

@@ -85,7 +85,6 @@ class UserVoter extends Voter
      *
      * @return bool Vote result
      */
-
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
@@ -111,19 +110,16 @@ class UserVoter extends Voter
      * Checks if user can edit user.
      *
      * @param User $user User entity
-     * @param User $user User
      *
      * @return bool Result
      */
     private function canEdit(User $user): bool
     {
-        if($this->security->isGranted('ROLE_ADMIN')){
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        }
-        else{
+        } else {
             return $user->getUsername() == $user;
         }
-
     }
 
     /**
@@ -135,10 +131,9 @@ class UserVoter extends Voter
      */
     private function canView(User $user): bool
     {
-        if($this->security->isGranted('ROLE_ADMIN')){
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        }
-        else{
+        } else {
             return $user->getUsername() == $user;
         }
     }
@@ -146,17 +141,15 @@ class UserVoter extends Voter
     /**
      * Checks if user can delete user.
      *
-     * @param User $user User entity
      * @param User $user User
      *
      * @return bool Result
      */
     private function canDelete(User $user): bool
     {
-        if($this->security->isGranted('ROLE_ADMIN')){
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        }
-        else{
+        } else {
             return $user->getUsername() == $user;
         }
     }

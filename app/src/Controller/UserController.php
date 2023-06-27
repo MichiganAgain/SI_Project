@@ -40,7 +40,7 @@ class UserController extends AbstractController
      * Constructor.
      *
      * @param UserServiceInterface $userService User service
-     * @param TranslatorInterface      $translator  Translator
+     * @param TranslatorInterface  $translator  Translator
      */
     public function __construct(UserServiceInterface $userService, TranslatorInterface $translator)
     {
@@ -125,8 +125,8 @@ class UserController extends AbstractController
     /**
      * Edit action.
      *
-     * @param Request  $request  HTTP request
-     * @param User $user User entity
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */
@@ -167,8 +167,8 @@ class UserController extends AbstractController
     /**
      * Delete action.
      *
-     * @param Request  $request  HTTP request
-     * @param User $user User entity
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */
@@ -183,23 +183,19 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $deleteMessage = $this->userService->delete($user);
 
-            if($deleteMessage){
+            if ($deleteMessage) {
                 $this->addFlash(
                     'success',
                     $this->translator->trans('user.deleted_successfully')
                 );
-            }
-            else{
+            } else {
                 $this->addFlash(
                     'warning',
                     $this->translator->trans('user.not_deleted')
                 );
             }
-
-
 
             return $this->redirectToRoute('user_index');
         }
@@ -212,5 +208,4 @@ class UserController extends AbstractController
             ]
         );
     }
-
 }

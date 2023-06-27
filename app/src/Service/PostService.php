@@ -12,12 +12,10 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\Security;
 
-
 /**
  * Class PostService.
  */
 class PostService implements PostServiceInterface
-
 {
 
     /**
@@ -38,11 +36,14 @@ class PostService implements PostServiceInterface
 
     private $security;
 
+
     /**
      * Constructor.
      *
-     * @param PostRepository     $postRepository Post repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param CategoryServiceInterface $categoryService
+     * @param PostRepository           $postRepository
+     * @param PaginatorInterface       $paginator
+     * @param Security                 $security
      */
     public function __construct(CategoryServiceInterface $categoryService, PostRepository $postRepository, PaginatorInterface $paginator, Security $security)
     {
@@ -55,8 +56,9 @@ class PostService implements PostServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int  $page   Page number
-     * @param User $author Author
+     * @param int   $page    Page number
+     * @param User  $author  Author
+     * @param array $filters filters
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
@@ -64,22 +66,19 @@ class PostService implements PostServiceInterface
     {
         $filters = $this->prepareFilters($filters);
 
-        if($this->security->isGranted('ROLE_ADMIN')){
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return $this->paginator->paginate(
-
                 $this->postRepository->queryAll($filters),
                 $page,
                 PostRepository::PAGINATOR_ITEMS_PER_PAGE
             );
-        }else{
+        } else {
             return $this->paginator->paginate(
-
                 $this->postRepository->queryByAuthor($author, $filters),
                 $page,
                 PostRepository::PAGINATOR_ITEMS_PER_PAGE
             );
         }
-
     }
 
     /**

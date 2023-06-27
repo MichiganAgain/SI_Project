@@ -1,11 +1,22 @@
 <?php
+/**
+ * Category Service Interface.
+ */
 
 namespace App\Service;
 
 use App\Entity\Category;
 
+/**
+ *  Category Service Interface.
+ */
 interface CategoryServiceInterface
 {
+    /**
+     * @param Category $category
+     *
+     * @return void
+     */
     public function save(Category $category): void;
 
     /**
@@ -16,6 +27,18 @@ interface CategoryServiceInterface
      * @return bool Result
      */
     public function canBeDeleted(Category $category): bool;
+
+    /**
+     * @param Category $category
+     *
+     * @return bool
+     */
     public function delete(Category $category): bool;
+
+    /**
+     * @param int $id
+     *
+     * @return Category|null
+     */
     public function findOneById(int $id): ?Category;
 }

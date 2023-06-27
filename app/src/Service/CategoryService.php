@@ -1,4 +1,7 @@
 <?php
+/**
+ * Category Service.
+ */
 
 namespace App\Service;
 
@@ -12,7 +15,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\Security;
 
 /**
- *
+ * Category Service.
  */
 class CategoryService implements CategoryServiceInterface
 {
@@ -22,6 +25,14 @@ class CategoryService implements CategoryServiceInterface
 
     private $security;
 
+    /**
+     * Constructor.
+     *
+     * @param CategoryRepository $categoryRepository
+     * @param PostRepository     $postRepository
+     * @param PaginatorInterface $paginator
+     * @param Security           $security
+     */
     public function __construct(CategoryRepository $categoryRepository, PostRepository $postRepository, PaginatorInterface $paginator, Security $security)
     {
         $this->categoryRepository = $categoryRepository;
@@ -30,6 +41,13 @@ class CategoryService implements CategoryServiceInterface
         $this->security = $security;
     }
 
+    /**
+     * Save Category.
+     *
+     * @param Category $category
+     *
+     * @return void
+     */
     public function save(Category $category): void
     {
         if (null == $category->getId()) {
@@ -40,13 +58,20 @@ class CategoryService implements CategoryServiceInterface
         $this->categoryRepository->save($category);
     }
 
+    /**
+     * Delete Category.
+     *
+     * @param Category $category
+     *
+     * @return bool
+     */
     public function delete(Category $category): bool
     {
-        if($this->canBeDeleted($category)){
+        if ($this->canBeDeleted($category)) {
             $this->categoryRepository->delete($category);
+
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -69,6 +94,13 @@ class CategoryService implements CategoryServiceInterface
         }
     }
 
+    /**
+     * Get the list of paginated items.
+     *
+     * @param int $page
+     *
+     * @return PaginationInterface
+     */
     public function getPaginatedList(int $page): PaginationInterface
     {
         return $this->paginator->paginate(

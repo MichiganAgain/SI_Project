@@ -172,6 +172,51 @@
                                                                            <source>title.post_delete</source>
                                                                            <target>Are you sure?</target>
                 </trans-unit>
+      <trans-unit id="action.user">
+                                                                                 <source>action.user</source>
+                                                                                 <target>Users</target>
+                      </trans-unit>
+      <trans-unit id="action.create_user">
+                                                                                 <source>action.create_user</source>
+                                                                                 <target>Create User</target>
+                      </trans-unit>
+      <trans-unit id="title.user_list">
+                                                                                 <source>title.user_list</source>
+                                                                                 <target>List of Users</target>
+       </trans-unit>
+       <trans-unit id="label.email">
+                                                                                        <source>label.email</source>
+                                                                                        <target>email</target>
+                             </trans-unit>
+             <trans-unit id="label.nickname">
+                                                                                        <source>label.nickname</source>
+                                                                                        <target>nickname</target>
+              </trans-unit>
+        <trans-unit id="title.user_create">
+                                                                                          <source>title.user_create</source>
+                                                                                          <target>Create User</target>
+                               </trans-unit>
+               <trans-unit id="label.password">
+                                                                                          <source>label.password</source>
+                                                                                          <target>password</target>
+                </trans-unit>
+       <trans-unit id="title.user_details">
+                                                                                                 <source>title.user_details</source>
+                                                                                                 <target>User Details</target>
+                                      </trans-unit>
+                      <trans-unit id="title.user_edit">
+                                                                                                 <source>title.user_edit</source>
+                                                                                                 <target>edit a user</target>
+                       </trans-unit>
+      <trans-unit id="title.user_delete">
+                                                                                                       <source>title.user_delete</source>
+                                                                                                       <target>are you sure?</target>
+                             </trans-unit>
+      <trans-unit id="user.not_deleted">
+                                                                                                             <source>user.not_deleted</source>
+                                                                                                             <target>User was not deleted!</target>
+                                   </trans-unit>
+
 
     </body>
   </file>

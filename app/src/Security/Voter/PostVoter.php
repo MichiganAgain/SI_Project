@@ -108,13 +108,11 @@ class PostVoter extends Voter
      */
     private function canEdit(Post $post, User $user): bool
     {
-        if($this->security->isGranted('ROLE_ADMIN')){
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        }
-        else{
+        } else {
             return $post->getAuthor() === $user;
         }
-
     }
 
     /**
@@ -127,10 +125,9 @@ class PostVoter extends Voter
      */
     private function canView(Post $post, User $user): bool
     {
-        if($this->security->isGranted('ROLE_ADMIN')){
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        }
-        else{
+        } else {
             return $post->getAuthor() === $user;
         }
     }
@@ -145,10 +142,9 @@ class PostVoter extends Voter
      */
     private function canDelete(Post $post, User $user): bool
     {
-        if($this->security->isGranted('ROLE_ADMIN')){
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        }
-        else{
+        } else {
             return $post->getAuthor() === $user;
         }
     }

@@ -1,4 +1,7 @@
 <?php
+/**
+ * User Service.
+ */
 
 namespace App\Service;
 
@@ -22,6 +25,14 @@ class UserService implements UserServiceInterface
 
     private $security;
 
+    /**
+     * Constructor.
+     *
+     * @param UserRepository     $userRepository
+     * @param PostRepository     $postRepository
+     * @param PaginatorInterface $paginator
+     * @param Security           $security
+     */
     public function __construct(UserRepository $userRepository, PostRepository $postRepository, PaginatorInterface $paginator, Security $security)
     {
         $this->userRepository = $userRepository;
@@ -30,6 +41,13 @@ class UserService implements UserServiceInterface
         $this->security = $security;
     }
 
+    /**
+     * Save User.
+     *
+     * @param User $user
+     *
+     * @return void
+     */
     public function save(User $user): void
     {
 //        if (null == $user->getId()) {
@@ -40,6 +58,13 @@ class UserService implements UserServiceInterface
         $this->userRepository->save($user);
     }
 
+    /**
+     * Edit User.
+     *
+     * @param User $user
+     *
+     * @return void
+     */
     public function edit(User $user): void
     {
 //        if (null == $user->getId()) {
@@ -50,13 +75,20 @@ class UserService implements UserServiceInterface
         $this->userRepository->edit($user);
     }
 
+    /**
+     * Delete User
+     *
+     * @param User $user
+     *
+     * @return bool
+     */
     public function delete(User $user): bool
     {
-        if($this->canBeDeleted($user)){
+        if ($this->canBeDeleted($user)) {
             $this->userRepository->remove($user);
+
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -79,6 +111,13 @@ class UserService implements UserServiceInterface
         }
     }
 
+    /**
+     * Get Paginated List.
+     *
+     * @param int $page
+     *
+     * @return PaginationInterface
+     */
     public function getPaginatedList(int $page): PaginationInterface
     {
         return $this->paginator->paginate(

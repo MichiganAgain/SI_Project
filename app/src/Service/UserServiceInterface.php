@@ -1,11 +1,25 @@
 <?php
+/**
+ * User Service Interface.
+ */
+
 
 namespace App\Service;
 
 use App\Entity\User;
 
+/**
+ * User Service Interface.
+ */
 interface UserServiceInterface
 {
+    /**
+     * Save User.
+     *
+     * @param User $user
+     *
+     * @return void
+     */
     public function save(User $user): void;
 
     /**
@@ -16,5 +30,13 @@ interface UserServiceInterface
      * @return bool Result
      */
     public function canBeDeleted(User $user): bool;
+
+    /**
+     * Delete User.
+     *
+     * @param User $user
+     *
+     * @return bool
+     */
     public function delete(User $user): bool;
 }

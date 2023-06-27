@@ -47,10 +47,13 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+
     /**
      * Query all records.
      *
-     * @return QueryBuilder Query builder
+     * @param array $filters
+     *
+     * @return QueryBuilder
      */
     public function queryAll(array $filters): QueryBuilder
     {
@@ -96,7 +99,6 @@ class PostRepository extends ServiceEntityRepository
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
-
     public function countByUser(User $user): int
     {
         $qb = $this->getOrCreateQueryBuilder();
@@ -131,23 +133,12 @@ class PostRepository extends ServiceEntityRepository
     }
 
     /**
-     * Get or create new query builder.
+     * Query Posts by Author
      *
-     * @param QueryBuilder|null $queryBuilder Query builder
+     * @param User  $user
+     * @param array $filters
      *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('post');
-    }
-
-    /**
-     * Query posts by author.
-     *
-     * @param User $user User entity
-     *
-     * @return QueryBuilder Query builder
+     * @return QueryBuilder
      */
     public function queryByAuthor(User $user, array $filters = []): QueryBuilder
     {
@@ -157,6 +148,18 @@ class PostRepository extends ServiceEntityRepository
             ->setParameter('author', $user);
 
         return $queryBuilder;
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('post');
     }
 
     /**
@@ -173,7 +176,7 @@ class PostRepository extends ServiceEntityRepository
             $queryBuilder->andWhere('category = :category')
                 ->setParameter('category', $filters['category']);
         }
+
         return $queryBuilder;
     }
-
 }

@@ -48,7 +48,7 @@ class PostFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             $category = $this->getRandomReference('categories');
             $post->setCategory($category);
 
-//            $post ->setStatus(PostStatus::from($this->faker->numberBetween(1, 2)));
+            //$post ->setStatus(PostStatus::from($this->faker->numberBetween(1, 2)));
 
             /** @var User $author */
             $author = $this->getRandomReference('users');
@@ -72,6 +72,4 @@ class PostFixtures extends AbstractBaseFixtures implements DependentFixtureInter
     {
         return [CategoryFixtures::class, UserFixtures::class];
     }
-
-
 }

@@ -173,6 +173,51 @@
                                                                                        <source>title.post_delete</source>
                                                                                        <target>Jestes pewien?</target>
                             </trans-unit>
+            <trans-unit id="action.user">
+                                                                                             <source>action.user</source>
+                                                                                             <target>Uzytkownicy</target>
+                                  </trans-unit>
+                  <trans-unit id="action.create_user">
+                                                                                             <source>action.create_user</source>
+                                                                                             <target>Utworz uzytkownika</target>
+                                  </trans-unit>
+                  <trans-unit id="title.user_list">
+                                                                                             <source>title.user_list</source>
+                                                                                             <target>Lista Uzytkownikow</target>
+                   </trans-unit>
+                   <trans-unit id="label.email">
+                                                                                                    <source>label.email</source>
+                                                                                                    <target>email</target>
+                                         </trans-unit>
+                         <trans-unit id="label.nickname">
+                                                                                                    <source>label.nickname</source>
+                                                                                                    <target>nazwa</target>
+                          </trans-unit>
+                    <trans-unit id="title.user_create">
+                                                                                                      <source>title.user_create</source>
+                                                                                                      <target>Utworz uzytkownka</target>
+                                           </trans-unit>
+                           <trans-unit id="label.password">
+                                                                                                      <source>label.password</source>
+                                                                                                      <target>haslo</target>
+                            </trans-unit>
+                   <trans-unit id="title.user_details">
+                                                                                                             <source>title.user_details</source>
+                                                                                                             <target>Szczegoly Uzytkownika</target>
+                                                  </trans-unit>
+                                  <trans-unit id="title.user_edit">
+                                                                                                             <source>title.user_edit</source>
+                                                                                                             <target>edytuj</target>
+                                   </trans-unit>
+                  <trans-unit id="title.user_delete">
+                                                                                                                   <source>title.user_delete</source>
+                                                                                                                   <target> na pewno? </target>
+                                         </trans-unit>
+                  <trans-unit id="user.not_deleted">
+                                                                                                                         <source>user.not_deleted</source>
+                                                                                                                         <target>Uzytkownik nie zostal usuniety!</target>
+                                               </trans-unit>
+
 
     </body>
   </file>

@@ -46,7 +46,6 @@ class UserFixtures extends AbstractBaseFixtures
                     $user,
                     'user1234'
                 )
-
             );
 
             return $user;

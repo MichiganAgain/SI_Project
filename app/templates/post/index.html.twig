@@ -60,6 +60,18 @@
                         </a>
                     </li>
                 {% endif %}
+                {% if is_granted('MANAGE')  %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('user_index') }}" title="{{ 'action.user'|trans }}">
+                            {{ 'action.user'|trans }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('user_create') }}" title="{{ 'action.create_user'|trans }}">
+                            {{ 'action.create_user'|trans }}
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </nav>

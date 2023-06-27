@@ -111,35 +111,32 @@ class CategoryVoter extends Voter
      * Checks if user can edit category.
      *
      * @param Category $category Category entity
-     * @param User $user User
+     * @param User     $user     User
      *
      * @return bool Result
      */
     private function canEdit(Category $category, User $user): bool
     {
-        if($this->security->isGranted('ROLE_ADMIN')){
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        }
-        else{
+        } else {
             return $category->getAuthor() === $user;
         }
-
     }
 
     /**
      * Checks if user can view category.
      *
      * @param Category $category Category entity
-     * @param User $user User
+     * @param User     $user     User
      *
      * @return bool Result
      */
     private function canView(Category $category, User $user): bool
     {
-        if($this->security->isGranted('ROLE_ADMIN')){
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        }
-        else{
+        } else {
             return $category->getAuthor() === $user;
         }
     }
@@ -148,16 +145,15 @@ class CategoryVoter extends Voter
      * Checks if user can delete category.
      *
      * @param Category $category Category entity
-     * @param User $user User
+     * @param User     $user     User
      *
      * @return bool Result
      */
     private function canDelete(Category $category, User $user): bool
     {
-        if($this->security->isGranted('ROLE_ADMIN')){
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        }
-        else{
+        } else {
             return $category->getAuthor() === $user;
         }
     }

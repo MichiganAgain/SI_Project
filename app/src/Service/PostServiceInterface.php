@@ -14,12 +14,13 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
  */
 interface PostServiceInterface
 {
+
     /**
-     * Get paginated list.
+     * @param int   $page
+     * @param User  $author
+     * @param array $filters
      *
-     * @param int $page Page number
-     *
-     * @return PaginationInterface<string, mixed> Paginated list
+     * @return PaginationInterface
      */
     public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface;
 
@@ -36,6 +37,4 @@ interface PostServiceInterface
      * @param Post $post Post entity
      */
     public function delete(Post $post): void;
-
-
 }

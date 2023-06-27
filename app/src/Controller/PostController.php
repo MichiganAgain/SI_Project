@@ -50,8 +50,12 @@ class PostController extends AbstractController
      */
     private TranslatorInterface $translator;
 
+
     /**
      * Constructor.
+     *
+     * @param PostServiceInterface $postService
+     * @param TranslatorInterface  $translator
      */
     public function __construct(PostServiceInterface $postService, TranslatorInterface $translator)
     {
@@ -83,24 +87,6 @@ class PostController extends AbstractController
     }
 
     /**
-     * Get filters from request.
-     *
-     * @param Request $request HTTP request
-     *
-     * @return array<string, int> Array of filters
-     *
-     * @psalm-return array{category_id: int, status_id: int}
-     */
-    private function getFilters(Request $request): array
-    {
-        $filters = [];
-        $filters['category_id'] = $request->query->getInt('filters_category_id');
-//        $filters['tag_id'] = $request->query->getInt('filters_tag_id');
-
-        return $filters;
-    }
-
-    /**
      * Show action.
      *
      * @param Post $post Post
@@ -116,15 +102,6 @@ class PostController extends AbstractController
     #[IsGranted('VIEW', subject: 'post')]
     public function show(Post $post): Response
     {
-//        if ($post->getAuthor() !== $this->getUser()) {
-//            $this->addFlash(
-//                'warning',
-//                $this->translator->trans('message.record_not_found')
-//            );
-//
-//            return $this->redirectToRoute('post_index');
-//        }
-
         return $this->render(
             'post/show.html.twig',
             ['post' => $post]
@@ -249,5 +226,23 @@ class PostController extends AbstractController
                 'post' => $post,
             ]
         );
+    }
+
+    /**
+     * Get filters from request.
+     *
+     * @param Request $request HTTP request
+     *
+     * @return array<string, int> Array of filters
+     *
+     * @psalm-return array{category_id: int, status_id: int}
+     */
+    private function getFilters(Request $request): array
+    {
+        $filters = [];
+        $filters['category_id'] = $request->query->getInt('filters_category_id');
+//        $filters['tag_id'] = $request->query->getInt('filters_tag_id');
+
+        return $filters;
     }
 }

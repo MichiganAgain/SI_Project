@@ -155,6 +155,7 @@ class PostController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'post_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[IsGranted('EDIT', subject: 'post')]
     public function edit(Request $request, Post $post): Response
     {
         $form = $this->createForm(
@@ -196,6 +197,7 @@ class PostController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'post_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    #[IsGranted('DELETE', subject: 'post')]
     public function delete(Request $request, Post $post): Response
     {
         $form = $this->createForm(

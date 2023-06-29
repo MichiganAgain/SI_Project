@@ -217,10 +217,14 @@
                                                                                                                          <source>user.not_deleted</source>
                                                                                                                          <target>Uzytkownik nie zostal usuniety!</target>
                                                </trans-unit>
-            <trans-unit id="message.edited_successfully ">
-                                                                                                                                <source>message.edited_successfully </source>
-                                                                                                                                <target>Zgloszenie Edytowane!</target>
-                                                      </trans-unit>
+            <trans-unit id="message.edited_successfully">
+                   <source>message.edited_successfully</source>
+                   <target>Zgloszenie Edytowane!</target>
+            </trans-unit>
+            <trans-unit id="user.deleted_successfully">
+                   <source>user.deleted_successfully</source>
+                   <target>Uzytkownik usuniety!</target>
+            </trans-unit>
 
     </body>
   </file>

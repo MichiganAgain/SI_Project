@@ -15,11 +15,10 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\Security;
 
 /**
- *
+ * User Service.
  */
 class UserService implements UserServiceInterface
 {
-
     private UserRepository $userRepository;
     private PostRepository $postRepository;
 
@@ -28,10 +27,10 @@ class UserService implements UserServiceInterface
     /**
      * Constructor.
      *
-     * @param UserRepository     $userRepository
-     * @param PostRepository     $postRepository
-     * @param PaginatorInterface $paginator
-     * @param Security           $security
+     * @param UserRepository     $userRepository UserRepository
+     * @param PostRepository     $postRepository PostRepository
+     * @param PaginatorInterface $paginator      PaginatorInterface
+     * @param Security           $security       Security
      */
     public function __construct(UserRepository $userRepository, PostRepository $postRepository, PaginatorInterface $paginator, Security $security)
     {
@@ -44,16 +43,16 @@ class UserService implements UserServiceInterface
     /**
      * Save User.
      *
-     * @param User $user
+     * @param User $user user
      *
-     * @return void
+     * @return void return void
      */
     public function save(User $user): void
     {
-//        if (null == $user->getId()) {
-//            $user->setCreatedAt(new \DateTimeImmutable());
-//        }
-//        $user->setUpdatedAt(new \DateTimeImmutable());
+        //        if (null == $user->getId()) {
+        //            $user->setCreatedAt(new \DateTimeImmutable());
+        //        }
+        //        $user->setUpdatedAt(new \DateTimeImmutable());
 
         $this->userRepository->save($user);
     }
@@ -61,26 +60,26 @@ class UserService implements UserServiceInterface
     /**
      * Edit User.
      *
-     * @param User $user
+     * @param User $user user
      *
-     * @return void
+     * @return void return void
      */
     public function edit(User $user): void
     {
-//        if (null == $user->getId()) {
-//            $user->setCreatedAt(new \DateTimeImmutable());
-//        }
-//        $user->setUpdatedAt(new \DateTimeImmutable());
+        //        if (null == $user->getId()) {
+        //            $user->setCreatedAt(new \DateTimeImmutable());
+        //        }
+        //        $user->setUpdatedAt(new \DateTimeImmutable());
 
         $this->userRepository->edit($user);
     }
 
     /**
-     * Delete User
+     * Delete User.
      *
-     * @param User $user
+     * @param User $user user
      *
-     * @return bool
+     * @return bool return bool value
      */
     public function delete(User $user): bool
     {
@@ -114,9 +113,9 @@ class UserService implements UserServiceInterface
     /**
      * Get Paginated List.
      *
-     * @param int $page
+     * @param int $page page
      *
-     * @return PaginationInterface
+     * @return PaginationInterface PaginationInterface
      */
     public function getPaginatedList(int $page): PaginationInterface
     {

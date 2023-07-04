@@ -25,8 +25,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     /**
-     * @param ManagerRegistry             $registry
-     * @param UserPasswordHasherInterface $passwordHasher
+     * @param ManagerRegistry             $registry       registry
+     * @param UserPasswordHasherInterface $passwordHasher passwordHasher
      */
     public function __construct(ManagerRegistry $registry, UserPasswordHasherInterface $passwordHasher)
     {
@@ -37,9 +37,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Save User.
      *
-     * @param User $entity
+     * @param User $entity entity
      *
-     * @return void
+     * @return void return statement
      */
     public function save(User $entity): void
     {
@@ -54,9 +54,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Edit User.
      *
-     * @param User $entity
+     * @param User $entity entity
      *
-     * @return void
+     * @return void return statement
      */
     public function edit(User $entity): void
     {
@@ -70,9 +70,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Remove User.
      *
-     * @param User $entity
+     * @param User $entity entity
      *
-     * @return void
+     * @return void return statement
      */
     public function remove(User $entity): void
     {
@@ -84,8 +84,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      *
-     * @param PasswordAuthenticatedUserInterface $user
-     * @param string                             $newHashedPassword
+     * @param PasswordAuthenticatedUserInterface $user              user
+     * @param string                             $newHashedPassword newHashedPassword
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
@@ -122,28 +122,28 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $queryBuilder ?? $this->createQueryBuilder('user');
     }
 
-//    /**
-//     * @return User[] Returns an array of User objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return User[] Returns an array of User objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('u')
+    //            ->andWhere('u.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('u.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?User
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?User
+    //    {
+    //        return $this->createQueryBuilder('u')
+    //            ->andWhere('u.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

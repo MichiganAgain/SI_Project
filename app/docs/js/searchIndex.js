@@ -123,12 +123,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\SecurityController\u003A\u003Alogin\u0028\u0029",
             "name": "login",
-            "summary": "",
+            "summary": "Login.",
             "url": "classes/App-Controller-SecurityController.html#method_login"
         },                {
             "fqsen": "\\App\\Controller\\SecurityController\u003A\u003Alogout\u0028\u0029",
             "name": "logout",
-            "summary": "",
+            "summary": "Logout.",
             "url": "classes/App-Controller-SecurityController.html#method_logout"
         },                {
             "fqsen": "\\App\\Controller\\UserController",
@@ -228,7 +228,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\DataFixtures\\AppFixtures\u003A\u003Aload\u0028\u0029",
             "name": "load",
-            "summary": "Load\u0020data\u0020fixtures\u0020with\u0020the\u0020passed\u0020EntityManager",
+            "summary": "Load\u0020data\u0020fixtures\u0020with\u0020the\u0020passed\u0020EntityManager.",
             "url": "classes/App-DataFixtures-AppFixtures.html#method_load"
         },                {
             "fqsen": "\\App\\DataFixtures\\CategoryFixtures",
@@ -318,12 +318,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Category\u003A\u003AgetSlug\u0028\u0029",
             "name": "getSlug",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020slug.",
             "url": "classes/App-Entity-Category.html#method_getSlug"
         },                {
             "fqsen": "\\App\\Entity\\Category\u003A\u003AsetSlug\u0028\u0029",
             "name": "setSlug",
-            "summary": "",
+            "summary": "Setter\u0020for\u0020slug.",
             "url": "classes/App-Entity-Category.html#method_setSlug"
         },                {
             "fqsen": "\\App\\Entity\\Category\u003A\u003A\u0024id",
@@ -413,17 +413,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Post\u003A\u003AgetCategory\u0028\u0029",
             "name": "getCategory",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020Category.",
             "url": "classes/App-Entity-Post.html#method_getCategory"
         },                {
             "fqsen": "\\App\\Entity\\Post\u003A\u003AsetCategory\u0028\u0029",
             "name": "setCategory",
-            "summary": "",
+            "summary": "Setter\u0020for\u0020Category.",
             "url": "classes/App-Entity-Post.html#method_setCategory"
         },                {
             "fqsen": "\\App\\Entity\\Post\u003A\u003AgetContent\u0028\u0029",
             "name": "getContent",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020content.",
             "url": "classes/App-Entity-Post.html#method_getContent"
         },                {
             "fqsen": "\\App\\Entity\\Post\u003A\u003AsetContent\u0028\u0029",
@@ -433,22 +433,22 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Post\u003A\u003AgetSlug\u0028\u0029",
             "name": "getSlug",
-            "summary": "",
+            "summary": "Getter\u0020fro\u0020slug.",
             "url": "classes/App-Entity-Post.html#method_getSlug"
         },                {
             "fqsen": "\\App\\Entity\\Post\u003A\u003AsetSlug\u0028\u0029",
             "name": "setSlug",
-            "summary": "",
+            "summary": "Setter\u0020for\u0020slug.",
             "url": "classes/App-Entity-Post.html#method_setSlug"
         },                {
             "fqsen": "\\App\\Entity\\Post\u003A\u003AgetAuthor\u0028\u0029",
             "name": "getAuthor",
-            "summary": "",
+            "summary": "Getter\u0020for\u0020author.",
             "url": "classes/App-Entity-Post.html#method_getAuthor"
         },                {
             "fqsen": "\\App\\Entity\\Post\u003A\u003AsetAuthor\u0028\u0029",
             "name": "setAuthor",
-            "summary": "",
+            "summary": "Setter\u0020for\u0020author.",
             "url": "classes/App-Entity-Post.html#method_setAuthor"
         },                {
             "fqsen": "\\App\\Entity\\Post\u003A\u003A\u0024id",
@@ -718,7 +718,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Repository\\PostRepository\u003A\u003AqueryByAuthor\u0028\u0029",
             "name": "queryByAuthor",
-            "summary": "Query\u0020Posts\u0020by\u0020Author",
+            "summary": "Query\u0020Posts\u0020by\u0020Author.",
             "url": "classes/App-Repository-PostRepository.html#method_queryByAuthor"
         },                {
             "fqsen": "\\App\\Repository\\PostRepository\u003A\u003AgetOrCreateQueryBuilder\u0028\u0029",
@@ -1051,6 +1051,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Service-CategoryService.html#property_postRepository"
         },                {
+            "fqsen": "\\App\\Service\\CategoryService\u003A\u003A\u0024paginator",
+            "name": "paginator",
+            "summary": "",
+            "url": "classes/App-Service-CategoryService.html#property_paginator"
+        },                {
             "fqsen": "\\App\\Service\\CategoryService\u003A\u003A\u0024security",
             "name": "security",
             "summary": "",
@@ -1153,7 +1158,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Service\\UserService",
             "name": "UserService",
-            "summary": "",
+            "summary": "User\u0020Service.",
             "url": "classes/App-Service-UserService.html"
         },                {
             "fqsen": "\\App\\Service\\UserService\u003A\u003A__construct\u0028\u0029",
@@ -1173,7 +1178,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Service\\UserService\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
-            "summary": "Delete\u0020User",
+            "summary": "Delete\u0020User.",
             "url": "classes/App-Service-UserService.html#method_delete"
         },                {
             "fqsen": "\\App\\Service\\UserService\u003A\u003AcanBeDeleted\u0028\u0029",

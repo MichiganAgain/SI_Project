@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Category Service.
  */
@@ -19,19 +20,18 @@ use Symfony\Component\Security\Core\Security;
  */
 class CategoryService implements CategoryServiceInterface
 {
-
     private CategoryRepository $categoryRepository;
     private PostRepository $postRepository;
-
-    private $security;
+    private PaginatorInterface $paginator;
+    private Security $security;
 
     /**
      * Constructor.
      *
-     * @param CategoryRepository $categoryRepository
-     * @param PostRepository     $postRepository
-     * @param PaginatorInterface $paginator
-     * @param Security           $security
+     * @param CategoryRepository $categoryRepository CategoryRepository
+     * @param PostRepository     $postRepository     PostRepository
+     * @param PaginatorInterface $paginator          PaginatorInterface
+     * @param Security           $security           Security
      */
     public function __construct(CategoryRepository $categoryRepository, PostRepository $postRepository, PaginatorInterface $paginator, Security $security)
     {
@@ -44,9 +44,9 @@ class CategoryService implements CategoryServiceInterface
     /**
      * Save Category.
      *
-     * @param Category $category
+     * @param Category $category category
      *
-     * @return void
+     * @return void return void
      */
     public function save(Category $category): void
     {
@@ -61,9 +61,9 @@ class CategoryService implements CategoryServiceInterface
     /**
      * Delete Category.
      *
-     * @param Category $category
+     * @param Category $category category
      *
-     * @return bool
+     * @return bool return bool
      */
     public function delete(Category $category): bool
     {
@@ -89,7 +89,7 @@ class CategoryService implements CategoryServiceInterface
             $result = $this->postRepository->countByCategory($category);
 
             return !($result > 0);
-        } catch (NoResultException|NonUniqueResultException) {
+        } catch (NoResultException|NonUniqueResultException $e) {
             return false;
         }
     }
@@ -97,9 +97,9 @@ class CategoryService implements CategoryServiceInterface
     /**
      * Get the list of paginated items.
      *
-     * @param int $page
+     * @param int $page Page
      *
-     * @return PaginationInterface
+     * @return PaginationInterface PaginationInterface
      */
     public function getPaginatedList(int $page): PaginationInterface
     {
@@ -117,7 +117,7 @@ class CategoryService implements CategoryServiceInterface
      *
      * @return Category|null Category entity
      *
-     * @throws NonUniqueResultException
+     * @throws NonUniqueResultException NonUniqueResultException
      */
     public function findOneById(int $id): ?Category
     {

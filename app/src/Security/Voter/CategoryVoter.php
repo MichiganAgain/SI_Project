@@ -48,7 +48,7 @@ class CategoryVoter extends Voter
     /**
      * Security helper.
      *
-     * @var Security
+     * @var Security Security
      */
     private Security $security;
 
@@ -73,7 +73,7 @@ class CategoryVoter extends Voter
     protected function supports(string $attribute, $subject): bool
     {
         return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE, self::MANAGE])
-            && ($subject === null || $subject instanceof Category);
+            && (null === $subject || $subject instanceof Category);
     }
 
     /**

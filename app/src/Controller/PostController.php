@@ -8,7 +8,6 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Form\Type\PostType;
-use App\Service\PostService;
 use App\Service\PostServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -29,14 +28,14 @@ class PostController extends AbstractController
     /**
      * Post repository.
      *
-     * @var PostRepository
+     * @var PostRepository PostRepository
      */
     private PostRepository $postRepository;
 
     /**
      * Paginator.
      *
-     * @var PaginatorInterface
+     * @var PaginatorInterface PaginatorInterface
      */
     private PaginatorInterface $paginator;
 
@@ -50,19 +49,17 @@ class PostController extends AbstractController
      */
     private TranslatorInterface $translator;
 
-
     /**
      * Constructor.
      *
-     * @param PostServiceInterface $postService
-     * @param TranslatorInterface  $translator
+     * @param PostServiceInterface $postService PostServiceInterface
+     * @param TranslatorInterface  $translator  TranslatorInterface
      */
     public function __construct(PostServiceInterface $postService, TranslatorInterface $translator)
     {
         $this->postService = $postService;
         $this->translator = $translator;
     }
-
 
     /**
      * Index action.
@@ -237,13 +234,13 @@ class PostController extends AbstractController
      *
      * @return array<string, int> Array of filters
      *
-     * @psalm-return array{category_id: int, status_id: int}
+     * @psalm-return array{category_id: int, status_id: int} array
      */
     private function getFilters(Request $request): array
     {
         $filters = [];
         $filters['category_id'] = $request->query->getInt('filters_category_id');
-//        $filters['tag_id'] = $request->query->getInt('filters_tag_id');
+        //        $filters['tag_id'] = $request->query->getInt('filters_tag_id');
 
         return $filters;
     }

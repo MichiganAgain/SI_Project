@@ -47,7 +47,7 @@ class UserVoter extends Voter
     /**
      * Security helper.
      *
-     * @var Security
+     * @var Security security
      */
     private Security $security;
 
@@ -72,7 +72,7 @@ class UserVoter extends Voter
     protected function supports(string $attribute, $subject): bool
     {
         return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE, self::MANAGE])
-            && ($subject === null || $subject instanceof User);
+            && (null === $subject || $subject instanceof User);
     }
 
     /**
@@ -119,7 +119,7 @@ class UserVoter extends Voter
             return true;
         }
 
-//        return $user->getUsername() == $user;
+        //        return $user->getUsername() == $user;
         return $user->getUsername() === $this->security->getUser()->getUsername();
     }
 
@@ -136,7 +136,7 @@ class UserVoter extends Voter
             return true;
         }
 
-//        return $user->getUsername() == $user;
+        //        return $user->getUsername() == $user;
         return $user->getUsername() === $this->security->getUser()->getUsername();
     }
 
@@ -153,7 +153,7 @@ class UserVoter extends Voter
             return true;
         }
 
-//        return $user->getUsername() == $user;
+        //        return $user->getUsername() == $user;
         return $user->getUsername() === $this->security->getUser()->getUsername();
     }
 

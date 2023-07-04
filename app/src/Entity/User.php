@@ -23,7 +23,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Primary key.
      *
-     * @var int|null
+     * @var int|null Primary key
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Email.
      *
-     * @var string|null
+     * @var string|null Email
      */
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank]
@@ -43,7 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Nickname.
      *
-     * @var string|null
+     * @var string|null Nickname
      */
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank]
@@ -52,7 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Roles.
      *
-     * @var array<int, string>
+     * @var array<int, string> Roles
      */
     #[ORM\Column(type: 'json')]
     private array $roles = [];
@@ -60,7 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Password.
      *
-     * @var string|null
+     * @var string|null Password
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
@@ -101,7 +101,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return string User identifier
      *
-     * @see UserInterface
+     * @see UserInterface UserInterface
      */
     public function getUserIdentifier(): string
     {
@@ -119,9 +119,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param string $nickname
+     * @param string $nickname param
      *
-     * @return void
+     * @return void return
      */
     public function setUsername(string $nickname): void
     {
@@ -133,7 +133,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return array<int, string> Roles
      *
-     * @see UserInterface
+     * @see UserInterface UserInterface
      */
     public function getRoles(): array
     {
@@ -159,7 +159,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return string|null Password
      *
-     * @see PasswordAuthenticatedUserInterface
+     * @see PasswordAuthenticatedUserInterface PasswordAuthenticatedUserInterface
      */
     public function getPassword(): ?string
     {
@@ -180,10 +180,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
      *
-     * @return string|null
+     * @return string|null return
      *
-     * @see UserInterface
-     *
+     * @see UserInterface UserInterface
      */
     public function getSalt(): ?string
     {
@@ -193,7 +192,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Removes sensitive information from the token.
      *
-     * @see UserInterface
+     * @see UserInterface UserInterface
      */
     public function eraseCredentials(): void
     {

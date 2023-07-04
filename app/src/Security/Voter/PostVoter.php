@@ -41,7 +41,7 @@ class PostVoter extends Voter
     /**
      * Security helper.
      *
-     * @var Security
+     * @var Security security
      */
     private Security $security;
 

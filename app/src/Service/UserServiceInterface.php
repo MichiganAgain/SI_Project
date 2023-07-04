@@ -3,7 +3,6 @@
  * User Service Interface.
  */
 
-
 namespace App\Service;
 
 use App\Entity\User;
@@ -16,9 +15,9 @@ interface UserServiceInterface
     /**
      * Save User.
      *
-     * @param User $user
+     * @param User $user user
      *
-     * @return void
+     * @return void return void
      */
     public function save(User $user): void;
 
@@ -34,9 +33,9 @@ interface UserServiceInterface
     /**
      * Delete User.
      *
-     * @param User $user
+     * @param User $user user
      *
-     * @return bool
+     * @return bool reurn bool value
      */
     public function delete(User $user): bool;
 }

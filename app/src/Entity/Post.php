@@ -24,7 +24,7 @@ class Post
     /**
      * Primary key.
      *
-     * @var int|null
+     * @var int|null int or null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -34,31 +34,31 @@ class Post
     /**
      * Created at.
      *
-     * @var DateTimeImmutable|null
+     * @var \DateTimeImmutable|null var
      *
      * @psalm-suppress PropertyNotSetInConstructor
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'create')]
-    private ?DateTimeImmutable $createdAt;
+    private ?\DateTimeImmutable $createdAt;
 
     /**
      * Updated at.
      *
-     * @var DateTimeImmutable|null
+     * @var \DateTimeImmutable|null var
      *
      * @psalm-suppress PropertyNotSetInConstructor
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'update')]
-    private ?DateTimeImmutable $updatedAt;
+    private ?\DateTimeImmutable $updatedAt;
 
     /**
      * Title.
      *
-     * @var string|null
+     * @var string|null var
      */
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Type('string')]
@@ -69,15 +69,12 @@ class Post
     /**
      * Category.
      *
-     * @var Category
-     *
+     * @var Category Category
      */
-
-    #[ORM\ManyToOne(targetEntity: Category::class, fetch: "EXTRA_LAZY")]
+    #[ORM\ManyToOne(targetEntity: Category::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank]
     private ?Category $category = null;
-
 
     #[ORM\Column(type: Types::TEXT, length: 65535)]
     #[Assert\Type('string')]
@@ -87,7 +84,8 @@ class Post
 
     /**
      * Slug.
-     * @var string|null
+     *
+     * @var string|null var
      */
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Type('string')]
@@ -98,7 +96,7 @@ class Post
     /**
      * Author.
      *
-     * @var User|null
+     * @var User|null var
      */
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
@@ -119,9 +117,9 @@ class Post
     /**
      * Getter for created at.
      *
-     * @return DateTimeImmutable|null Created at
+     * @return \DateTimeImmutable|null Created at
      */
-    public function getCreatedAt(): ?DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
@@ -129,9 +127,9 @@ class Post
     /**
      * Setter for created at.
      *
-     * @param DateTimeImmutable|null $createdAt Created at
+     * @param \DateTimeImmutable|null $createdAt Created at
      */
-    public function setCreatedAt(?DateTimeImmutable $createdAt): void
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -139,9 +137,9 @@ class Post
     /**
      * Getter for updated at.
      *
-     * @return DateTimeImmutable|null Updated at
+     * @return \DateTimeImmutable|null Updated at
      */
-    public function getUpdatedAt(): ?DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
@@ -149,9 +147,9 @@ class Post
     /**
      * Setter for updated at.
      *
-     * @param DateTimeImmutable|null $updatedAt Updated at
+     * @param \DateTimeImmutable|null $updatedAt Updated at
      */
-    public function setUpdatedAt(?DateTimeImmutable $updatedAt): void
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -177,7 +175,9 @@ class Post
     }
 
     /**
-     * @return Category|null
+     * Getter for Category.
+     *
+     * @return Category|null return Category
      */
     public function getCategory(): ?Category
     {
@@ -185,9 +185,11 @@ class Post
     }
 
     /**
-     * @param Category|null $category
+     * Setter for Category.
      *
-     * @return $this
+     * @param Category|null $category Category
+     *
+     * @return $this return this
      */
     public function setCategory(?Category $category): self
     {
@@ -197,7 +199,9 @@ class Post
     }
 
     /**
-     * @return string|null
+     * Getter for content.
+     *
+     * @return string|null return
      */
     public function getContent(): ?string
     {
@@ -205,9 +209,9 @@ class Post
     }
 
     /**
-     * @param string $content
+     * @param string $content Content
      *
-     * @return $this
+     * @return $this return
      */
     public function setContent(string $content): self
     {
@@ -217,7 +221,9 @@ class Post
     }
 
     /**
-     * @return string|null
+     * Getter fro slug.
+     *
+     * @return string|null return
      */
     public function getSlug(): ?string
     {
@@ -225,9 +231,11 @@ class Post
     }
 
     /**
-     * @param string $slug
+     * Setter for slug.
      *
-     * @return $this
+     * @param string $slug slug
+     *
+     * @return $this return
      */
     public function setSlug(string $slug): self
     {
@@ -237,7 +245,9 @@ class Post
     }
 
     /**
-     * @return User|null
+     * Getter for author.
+     *
+     * @return User|null return
      */
     public function getAuthor(): ?User
     {
@@ -245,9 +255,11 @@ class Post
     }
 
     /**
-     * @param User|null $author
+     * Setter for author.
      *
-     * @return $this
+     * @param User|null $author param
+     *
+     * @return $this return
      */
     public function setAuthor(?User $author): self
     {

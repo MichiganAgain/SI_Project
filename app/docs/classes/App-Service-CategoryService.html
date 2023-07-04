@@ -138,7 +138,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Service/CategoryService.php"><a href="files/src-service-categoryservice.html"><abbr title="src/Service/CategoryService.php">CategoryService.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
@@ -178,6 +178,13 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/App-Service-CategoryService.html#property_paginator">$paginator</a>
+    <span>
+                        &nbsp;: <abbr title="\Knp\Component\Pager\PaginatorInterface">PaginatorInterface</abbr>            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/App-Service-CategoryService.html#property_postRepository">$postRepository</a>
     <span>
                         &nbsp;: <a href="classes/App-Repository-PostRepository.html"><abbr title="\App\Repository\PostRepository">PostRepository</abbr></a>            </span>
@@ -187,7 +194,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/App-Service-CategoryService.html#property_security">$security</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: <abbr title="\Symfony\Component\Security\Core\Security">Security</abbr>            </span>
 </dt>
 <dd></dd>
 
@@ -286,6 +293,40 @@
             -private
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="property_paginator">
+        $paginator
+        <a href="classes/App-Service-CategoryService.html#property_paginator" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Service/CategoryService.php"><a href="files/src-service-categoryservice.html"><abbr title="src/Service/CategoryService.php">CategoryService.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">25</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Knp\Component\Pager\PaginatorInterface">PaginatorInterface</abbr></span>
+    <span class="phpdocumentor-signature__name">$paginator</span>
+    </code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="property_postRepository">
         $postRepository
         <a href="classes/App-Service-CategoryService.html#property_postRepository" class="headerlink"><i class="fas fa-link"></i></a>
@@ -336,7 +377,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Symfony\Component\Security\Core\Security">Security</abbr></span>
     <span class="phpdocumentor-signature__name">$security</span>
     </code>
 
@@ -385,28 +426,36 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Repository-CategoryRepository.html"><abbr title="\App\Repository\CategoryRepository">CategoryRepository</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>CategoryRepository</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$postRepository</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Repository-PostRepository.html"><abbr title="\App\Repository\PostRepository">PostRepository</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>PostRepository</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$paginator</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Knp\Component\Pager\PaginatorInterface">PaginatorInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>PaginatorInterface</p>
+</section>
+
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$security</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Symfony\Component\Security\Core\Security">Security</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Security</p>
+</section>
+
             </dd>
             </dl>
 
@@ -496,7 +545,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Entity-Category.html"><abbr title="\App\Entity\Category">Category</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>category</p>
+</section>
+
             </dd>
             </dl>
 
@@ -505,7 +556,9 @@
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">bool</span>
             &mdash;
-        
+            <section class="phpdocumentor-description"><p>return bool</p>
+</section>
+
     
 </article>
                     <article
@@ -557,7 +610,9 @@
                 <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><abbr title="\Doctrine\ORM\NonUniqueResultException">NonUniqueResultException</abbr></span>
                                                             
-                                             
+                                                 <section class="phpdocumentor-description"><p>NonUniqueResultException</p>
+</section>
+
                                     </dd>
                         </dl>
 
@@ -600,7 +655,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Page</p>
+</section>
+
             </dd>
             </dl>
 
@@ -609,7 +666,9 @@
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type"><abbr title="\Knp\Component\Pager\Pagination\PaginationInterface">PaginationInterface</abbr></span>
             &mdash;
-        
+            <section class="phpdocumentor-description"><p>PaginationInterface</p>
+</section>
+
     
 </article>
                     <article
@@ -643,7 +702,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Entity-Category.html"><abbr title="\App\Entity\Category">Category</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>category</p>
+</section>
+
             </dd>
             </dl>
 
@@ -652,7 +713,9 @@
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
-        
+            <section class="phpdocumentor-description"><p>return void</p>
+</section>
+
     
 </article>
             </section>

@@ -47,13 +47,12 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-
     /**
      * Query all records.
      *
-     * @param array $filters
+     * @param array $filters filters
      *
-     * @return QueryBuilder
+     * @return QueryBuilder QueryBuilder
      */
     public function queryAll(array $filters): QueryBuilder
     {
@@ -96,8 +95,8 @@ class PostRepository extends ServiceEntityRepository
      *
      * @return int Number of posts in category
      *
-     * @throws NoResultException
-     * @throws NonUniqueResultException
+     * @throws NoResultException        NoResultException
+     * @throws NonUniqueResultException NonUniqueResultException
      */
     public function countByUser(User $user): int
     {
@@ -133,12 +132,12 @@ class PostRepository extends ServiceEntityRepository
     }
 
     /**
-     * Query Posts by Author
+     * Query Posts by Author.
      *
-     * @param User  $user
-     * @param array $filters
+     * @param User  $user    user
+     * @param array $filters filters
      *
-     * @return QueryBuilder
+     * @return QueryBuilder QueryBuilder
      */
     public function queryByAuthor(User $user, array $filters = []): QueryBuilder
     {

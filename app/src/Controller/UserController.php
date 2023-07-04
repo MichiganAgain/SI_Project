@@ -7,7 +7,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\Type\UserType;
-use App\Repository\UserRepository;
 use App\Service\UserServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +31,7 @@ class UserController extends AbstractController
     /**
      * Translator.
      *
-     * @var TranslatorInterface
+     * @var TranslatorInterface TranslatorInterface
      */
     private TranslatorInterface $translator;
 

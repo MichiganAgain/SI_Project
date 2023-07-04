@@ -7,7 +7,6 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\Type\CategoryType;
-use App\Repository\CategoryRepository;
 use App\Service\CategoryServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +31,7 @@ class CategoryController extends AbstractController
     /**
      * Translator.
      *
-     * @var TranslatorInterface
+     * @var TranslatorInterface TranslatorInterface
      */
     private TranslatorInterface $translator;
 

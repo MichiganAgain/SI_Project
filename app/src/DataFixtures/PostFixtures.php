@@ -6,10 +6,9 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-//use App\Entity\Enum\PostStatus;
+// use App\Entity\Enum\PostStatus;
 use App\Entity\Post;
 use App\Entity\User;
-use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
@@ -35,12 +34,12 @@ class PostFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             $post->setTitle($this->faker->sentence);
             $post->setContent($this->faker->sentence);
             $post->setCreatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
             $post->setUpdatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
@@ -48,7 +47,7 @@ class PostFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             $category = $this->getRandomReference('categories');
             $post->setCategory($category);
 
-            //$post ->setStatus(PostStatus::from($this->faker->numberBetween(1, 2)));
+            // $post ->setStatus(PostStatus::from($this->faker->numberBetween(1, 2)));
 
             /** @var User $author */
             $author = $this->getRandomReference('users');

@@ -17,7 +17,6 @@ use Symfony\Component\Security\Core\Security;
  */
 class PostService implements PostServiceInterface
 {
-
     /**
      * Category service.
      */
@@ -33,17 +32,15 @@ class PostService implements PostServiceInterface
      */
     private PaginatorInterface $paginator;
 
-
     private $security;
-
 
     /**
      * Constructor.
      *
-     * @param CategoryServiceInterface $categoryService
-     * @param PostRepository           $postRepository
-     * @param PaginatorInterface       $paginator
-     * @param Security                 $security
+     * @param CategoryServiceInterface $categoryService CategoryServiceInterface
+     * @param PostRepository           $postRepository  PostRepository
+     * @param PaginatorInterface       $paginator       PaginatorInterface
+     * @param Security                 $security        Security
      */
     public function __construct(CategoryServiceInterface $categoryService, PostRepository $postRepository, PaginatorInterface $paginator, Security $security)
     {

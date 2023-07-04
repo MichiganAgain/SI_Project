@@ -13,9 +13,9 @@ use App\Entity\Category;
 interface CategoryServiceInterface
 {
     /**
-     * @param Category $category
+     * @param Category $category category
      *
-     * @return void
+     * @return void return void
      */
     public function save(Category $category): void;
 
@@ -29,16 +29,16 @@ interface CategoryServiceInterface
     public function canBeDeleted(Category $category): bool;
 
     /**
-     * @param Category $category
+     * @param Category $category category
      *
-     * @return bool
+     * @return bool return bool
      */
     public function delete(Category $category): bool;
 
     /**
-     * @param int $id
+     * @param int $id id
      *
-     * @return Category|null
+     * @return Category|null return null
      */
     public function findOneById(int $id): ?Category;
 }

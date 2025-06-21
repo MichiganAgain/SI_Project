@@ -40,5 +40,5 @@ interface CategoryServiceInterface
      *
      * @return Category|null return null
      */
-    public function findOneById(int $id): ?Category;
+//    public function findOneById(int $id): ?Category;
 }

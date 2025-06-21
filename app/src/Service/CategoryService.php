@@ -119,8 +119,8 @@ class CategoryService implements CategoryServiceInterface
      *
      * @throws NonUniqueResultException NonUniqueResultException
      */
-    public function findOneById(int $id): ?Category
-    {
-        return $this->categoryRepository->findOneById($id);
-    }
+//    public function findOneById(int $id): ?Category
+//    {
+//        return $this->categoryRepository->findOneById($id);
+//    }
 }

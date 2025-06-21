@@ -47,6 +47,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "*",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "escapestudios/symfony2-coding-standard": "^3.13",
         "fakerphp/faker": "^1.22",
@@ -57,7 +58,7 @@
         "symfony/css-selector": "5.4.*",
         "symfony/debug-bundle": "5.4.*",
         "symfony/maker-bundle": "^1.48",
-        "symfony/phpunit-bridge": "^6.2",
+        "symfony/phpunit-bridge": "*",
         "symfony/stopwatch": "5.4.*",
         "symfony/web-profiler-bundle": "5.4.*"
     },
@@ -106,6 +107,10 @@
             "./vendor/bin/phpcs --config-set default_standard Symfony",
             "./vendor/bin/phpcs --standard=Symfony src/ --ignore=Kernel.php",
             "./vendor/bin/php-cs-fixer fix src/ --rules=@Symfony,@PSR1,@PSR2,@PSR12"
+        ],
+        "init-app" : [
+            "./bin/console --no-interaction doctrine:migrations:migrate",
+            "./bin/console --no-interaction doctrine:fixtures:load"
         ]
     },
     "conflict": {

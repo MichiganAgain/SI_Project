@@ -1,13 +1,26 @@
 <?php
+/**
+ * CategoryTest test cases.
+ *
+ * @license MIT
+ */
 
 namespace App\Tests\Entity;
 
 use App\Entity\Category;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class CategoryTest.
+ *
+ * Tests for the Category entity.
+ */
 class CategoryTest extends TestCase
 {
-    public function testSetAndGetId()
+    /**
+     * Test setting and getting the ID property.
+     */
+    public function testSetAndGetId(): void
     {
         $category = new Category();
 
@@ -19,7 +32,10 @@ class CategoryTest extends TestCase
         $this->assertEquals(123, $category->getId());
     }
 
-    public function testSetAndGetCreatedAt()
+    /**
+     * Test setting and getting the createdAt property.
+     */
+    public function testSetAndGetCreatedAt(): void
     {
         $category = new Category();
         $now = new \DateTimeImmutable();
@@ -28,7 +44,10 @@ class CategoryTest extends TestCase
         $this->assertSame($now, $category->getCreatedAt());
     }
 
-    public function testSetAndGetUpdatedAt()
+    /**
+     * Test setting and getting the updatedAt property.
+     */
+    public function testSetAndGetUpdatedAt(): void
     {
         $category = new Category();
         $now = new \DateTimeImmutable();
@@ -37,7 +56,10 @@ class CategoryTest extends TestCase
         $this->assertSame($now, $category->getUpdatedAt());
     }
 
-    public function testSetAndGetTitle()
+    /**
+     * Test setting and getting the title property.
+     */
+    public function testSetAndGetTitle(): void
     {
         $category = new Category();
         $title = 'Test Category';
@@ -46,7 +68,10 @@ class CategoryTest extends TestCase
         $this->assertSame($title, $category->getTitle());
     }
 
-    public function testSetAndGetSlug()
+    /**
+     * Test setting and getting the slug property.
+     */
+    public function testSetAndGetSlug(): void
     {
         $category = new Category();
         $slug = 'test-category';

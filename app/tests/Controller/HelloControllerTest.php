@@ -1,4 +1,9 @@
 <?php
+/**
+ * Hello controller tests.
+ *
+ * @license MIT
+ */
 
 namespace App\Tests\Controller;
 
@@ -15,6 +20,9 @@ class HelloControllerTest extends WebTestCase
     private $client;
     private $entityManager;
 
+    /**
+     * Set up test environment.
+     */
     protected function setUp(): void
     {
         $this->client = static::createClient();
@@ -23,6 +31,9 @@ class HelloControllerTest extends WebTestCase
         $this->logInUser();
     }
 
+    /**
+     * Test /hello route with a given name.
+     */
     public function testHelloWithName(): void
     {
         $this->client->request('GET', '/hello/Alice');
@@ -32,6 +43,9 @@ class HelloControllerTest extends WebTestCase
         $this->assertSelectorTextContains('title', 'Hello Alice!');
     }
 
+    /**
+     * Log in test user.
+     */
     private function logInUser(): void
     {
         $hasher = static::getContainer()->get(UserPasswordHasherInterface::class);
@@ -40,7 +54,7 @@ class HelloControllerTest extends WebTestCase
         if (!$user) {
             $user = new User();
             $user->setEmail('test@example.com');
-            $user->setUsername('TestNick'); // <- wymagane pole!
+            $user->setUsername('TestNick');
             $user->setRoles(['ROLE_USER']);
             $user->setPassword($hasher->hashPassword($user, 'test123'));
 
@@ -50,5 +64,4 @@ class HelloControllerTest extends WebTestCase
 
         $this->client->loginUser($user);
     }
-
 }

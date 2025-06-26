@@ -1,8 +1,12 @@
 <?php
+/**
+ * PostService test cases.
+ *
+ * @license MIT
+ */
 
 namespace App\Tests\Service;
 
-use App\Entity\Category;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Repository\PostRepository;
@@ -12,11 +16,18 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
+/**
+ * Class PostServiceTest.
+ *
+ * Unit tests for the PostService class.
+ */
 class PostServiceTest extends TestCase
 {
-    public function testSavePersistsPost()
+    /**
+     * Test that save() persists a Post entity.
+     */
+    public function testSavePersistsPost(): void
     {
         $post = new Post();
 
@@ -33,7 +44,10 @@ class PostServiceTest extends TestCase
         $service->save($post);
     }
 
-    public function testDeleteRemovesPost()
+    /**
+     * Test that delete() removes a Post entity.
+     */
+    public function testDeleteRemovesPost(): void
     {
         $post = new Post();
 
@@ -50,7 +64,10 @@ class PostServiceTest extends TestCase
         $service->delete($post);
     }
 
-    public function testGetPaginatedListForAdmin()
+    /**
+     * Test getPaginatedList() returns posts for admin users.
+     */
+    public function testGetPaginatedListForAdmin(): void
     {
         $user = new User();
         $filters = [];
@@ -87,7 +104,10 @@ class PostServiceTest extends TestCase
         $this->assertSame($pagination, $result);
     }
 
-    public function testGetPaginatedListForRegularUser()
+    /**
+     * Test getPaginatedList() returns posts for regular (non-admin) users.
+     */
+    public function testGetPaginatedListForRegularUser(): void
     {
         $user = new User();
         $filters = [];
@@ -123,5 +143,4 @@ class PostServiceTest extends TestCase
         $result = $service->getPaginatedList(1, $user, $filters);
         $this->assertSame($pagination, $result);
     }
-
 }

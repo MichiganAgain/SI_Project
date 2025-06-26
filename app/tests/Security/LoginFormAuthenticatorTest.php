@@ -1,4 +1,9 @@
 <?php
+/**
+ * LoginFormAuthenticator test cases.
+ *
+ * @license MIT
+ */
 
 namespace App\Tests\Security;
 
@@ -6,27 +11,23 @@ use App\Security\LoginFormAuthenticator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
-use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
-use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
-use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 
+/**
+ * Class LoginFormAuthenticatorTest.
+ *
+ * Test cases for LoginFormAuthenticator logic.
+ */
 class LoginFormAuthenticatorTest extends TestCase
 {
     private UrlGeneratorInterface $urlGenerator;
     private LoginFormAuthenticator $authenticator;
 
-    protected function setUp(): void
-    {
-        $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
-        $this->authenticator = new LoginFormAuthenticator($this->urlGenerator);
-    }
-
+    /**
+     * Test supports() returns true for login route with POST method.
+     */
     public function testSupportsReturnsTrueForLoginRouteAndPost(): void
     {
         $request = new Request([], [], ['_route' => 'app_login']);
@@ -35,6 +36,9 @@ class LoginFormAuthenticatorTest extends TestCase
         $this->assertTrue($this->authenticator->supports($request));
     }
 
+    /**
+     * Test supports() returns false for routes other than login.
+     */
     public function testSupportsReturnsFalseForOtherRoutes(): void
     {
         $request = new Request([], [], ['_route' => 'some_other_route']);
@@ -43,6 +47,9 @@ class LoginFormAuthenticatorTest extends TestCase
         $this->assertFalse($this->authenticator->supports($request));
     }
 
+    /**
+     * Test onAuthenticationSuccess returns RedirectResponse to target path from session.
+     */
     public function testOnAuthenticationSuccessWithTargetPath(): void
     {
         $session = new \Symfony\Component\HttpFoundation\Session\Session(new MockArraySessionStorage());
@@ -59,6 +66,9 @@ class LoginFormAuthenticatorTest extends TestCase
         $this->assertEquals('/target-url', $response->getTargetUrl());
     }
 
+    /**
+     * Test onAuthenticationSuccess redirects to default route if no target path.
+     */
     public function testOnAuthenticationSuccessWithNoTargetPath(): void
     {
         $request = new Request();
@@ -78,6 +88,9 @@ class LoginFormAuthenticatorTest extends TestCase
         $this->assertEquals('/post', $response->getTargetUrl());
     }
 
+    /**
+     * Test getLoginUrl() using reflection.
+     */
     public function testGetLoginUrlUsingReflection(): void
     {
         $request = new Request();
@@ -96,4 +109,12 @@ class LoginFormAuthenticatorTest extends TestCase
         $this->assertEquals('/login', $loginUrl);
     }
 
+    /**
+     * Sets up the test instance.
+     */
+    protected function setUp(): void
+    {
+        $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
+        $this->authenticator = new LoginFormAuthenticator($this->urlGenerator);
+    }
 }

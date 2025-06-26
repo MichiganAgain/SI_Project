@@ -1,4 +1,9 @@
 <?php
+/**
+ * UserVoter test cases.
+ *
+ * @license MIT
+ */
 
 namespace App\Tests\Security\Voter;
 
@@ -8,25 +13,26 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Security;
 
+/**
+ * Class UserVoterTest.
+ *
+ * Test cases for the UserVoter authorization logic.
+ */
 class UserVoterTest extends TestCase
 {
     private UserVoter $voter;
-    private $securityMock;
+    private Security $securityMock;
 
-    protected function setUp(): void
-    {
-        $this->securityMock = $this->createMock(Security::class);
-        $this->voter = new UserVoter($this->securityMock);
-    }
-
-    public function testAdminCanDoEverything()
+    /**
+     * Test that admin user is granted access to all actions.
+     */
+    public function testAdminCanDoEverything(): void
     {
         $user = new User();
         $token = $this->createMock(TokenInterface::class);
 
         $token->method('getUser')->willReturn($user);
         $this->securityMock->method('isGranted')->with('ROLE_ADMIN')->willReturn(true);
-
         $this->securityMock->method('getUser')->willReturn($user);
 
         foreach ([UserVoter::EDIT, UserVoter::VIEW, UserVoter::DELETE, UserVoter::MANAGE] as $attribute) {
@@ -34,7 +40,10 @@ class UserVoterTest extends TestCase
         }
     }
 
-    public function testUserCanEditViewDeleteSelf()
+    /**
+     * Test that a user can edit, view, and delete their own account.
+     */
+    public function testUserCanEditViewDeleteSelf(): void
     {
         $currentUser = new User();
         $currentUser->setUsername('john');
@@ -45,13 +54,15 @@ class UserVoterTest extends TestCase
         $this->securityMock->method('isGranted')->with('ROLE_ADMIN')->willReturn(false);
         $this->securityMock->method('getUser')->willReturn($currentUser);
 
-        // User tries to access himself
         foreach ([UserVoter::EDIT, UserVoter::VIEW, UserVoter::DELETE] as $attribute) {
             $this->assertEquals(UserVoter::ACCESS_GRANTED, $this->voter->vote($token, $currentUser, [$attribute]));
         }
     }
 
-    public function testUserCannotEditViewDeleteOthers()
+    /**
+     * Test that a user cannot edit, view, or delete another user's account.
+     */
+    public function testUserCannotEditViewDeleteOthers(): void
     {
         $currentUser = new User();
         $currentUser->setUsername('john');
@@ -65,17 +76,18 @@ class UserVoterTest extends TestCase
         $this->securityMock->method('isGranted')->with('ROLE_ADMIN')->willReturn(false);
         $this->securityMock->method('getUser')->willReturn($currentUser);
 
-        // User tries to access another user
         foreach ([UserVoter::EDIT, UserVoter::VIEW, UserVoter::DELETE] as $attribute) {
             $this->assertEquals(UserVoter::ACCESS_DENIED, $this->voter->vote($token, $otherUser, [$attribute]));
         }
     }
 
-    public function testManageRequiresAdmin()
+    /**
+     * Test that only admin can manage users.
+     */
+    public function testManageRequiresAdmin(): void
     {
         $user = new User();
         $token = $this->createMock(TokenInterface::class);
-
         $token->method('getUser')->willReturn($user);
 
         $this->securityMock->method('getUser')->willReturn($user);
@@ -85,16 +97,14 @@ class UserVoterTest extends TestCase
             ->with('ROLE_ADMIN')
             ->willReturnOnConsecutiveCalls(false, true);
 
-        $token = $this->createMock(TokenInterface::class);
-        $token->method('getUser')->willReturn($user);
-        $this->securityMock->method('getUser')->willReturn($user);
-
         $this->assertEquals(UserVoter::ACCESS_DENIED, $this->voter->vote($token, null, [UserVoter::MANAGE]));
         $this->assertEquals(UserVoter::ACCESS_GRANTED, $this->voter->vote($token, null, [UserVoter::MANAGE]));
-
     }
 
-    public function testVoteAbstainsForUnsupportedAttributes()
+    /**
+     * Test that unsupported attributes result in abstain.
+     */
+    public function testVoteAbstainsForUnsupportedAttributes(): void
     {
         $user = new User();
         $token = $this->createMock(TokenInterface::class);
@@ -106,15 +116,46 @@ class UserVoterTest extends TestCase
         $this->assertEquals(UserVoter::ACCESS_ABSTAIN, $this->voter->vote($token, $user, ['UNSUPPORTED']));
     }
 
-    public function testAnonymousUserIsDenied()
+    /**
+     * Test that anonymous users are denied access.
+     */
+    public function testAnonymousUserIsDenied(): void
     {
-        $post = new User();
+        $targetUser = new User();
         $token = $this->createMock(TokenInterface::class);
 
         $token->method('getUser')->willReturn(null);
         $this->securityMock->method('isGranted')->willReturn(false);
         $this->securityMock->method('getUser')->willReturn(null);
 
-        $this->assertEquals(UserVoter::ACCESS_DENIED, $this->voter->vote($token, $post, [UserVoter::VIEW]));
+        $this->assertEquals(UserVoter::ACCESS_DENIED, $this->voter->vote($token, $targetUser, [UserVoter::VIEW]));
+    }
+
+    /**
+     * Test that voteOnAttribute returns false for unknown attribute.
+     */
+    public function testVoteOnAttributeReturnsFalseForUnknownAttribute(): void
+    {
+        $user = new User();
+        $token = $this->createMock(TokenInterface::class);
+
+        $token->method('getUser')->willReturn($user);
+        $this->securityMock->method('getUser')->willReturn($user);
+        $this->securityMock->method('isGranted')->willReturn(false);
+
+        $method = new \ReflectionMethod(UserVoter::class, 'voteOnAttribute');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->voter, 'UNKNOWN', $user, $token);
+        $this->assertFalse($result);
+    }
+
+    /**
+     * Sets up the test environment.
+     */
+    protected function setUp(): void
+    {
+        $this->securityMock = $this->createMock(Security::class);
+        $this->voter = new UserVoter($this->securityMock);
     }
 }

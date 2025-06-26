@@ -1,4 +1,10 @@
 <?php
+/**
+ * UserType test cases.
+ *
+ * @license MIT
+ */
+
 namespace App\Tests\Form\Type;
 
 use App\Entity\User;
@@ -6,15 +12,16 @@ use App\Form\Type\UserType;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 
+/**
+ * Class UserTypeTest.
+ *
+ * Test cases for the UserType form.
+ */
 class UserTypeTest extends TypeTestCase
 {
-    protected function getExtensions(): array
-    {
-        return [
-            new PreloadedExtension([new UserType()], []),
-        ];
-    }
-
+    /**
+     * Test submitting valid data to the UserType form.
+     */
     public function testSubmitValidData(): void
     {
         $formData = [
@@ -45,9 +52,24 @@ class UserTypeTest extends TypeTestCase
         $this->assertArrayHasKey('password', $children);
     }
 
+    /**
+     * Test getBlockPrefix returns expected string.
+     */
     public function testGetBlockPrefix(): void
     {
         $type = new UserType();
         $this->assertSame('user', $type->getBlockPrefix());
+    }
+
+    /**
+     * Returns form type extensions to preload.
+     *
+     * @return array a return function
+     */
+    protected function getExtensions(): array
+    {
+        return [
+            new PreloadedExtension([new UserType()], []),
+        ];
     }
 }

@@ -1,4 +1,9 @@
 <?php
+/**
+ * CategoryFixtures test cases.
+ *
+ * @license MIT
+ */
 
 namespace App\Tests\DataFixtures;
 
@@ -8,9 +13,15 @@ use Doctrine\Common\DataFixtures\ReferenceRepository;
 use Doctrine\Persistence\ObjectManager;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class CategoryFixturesTest.
+ */
 class CategoryFixturesTest extends TestCase
 {
-    public function testLoadDataCreatesCategories()
+    /**
+     * Tests that load() creates 20 Category entities and flushes once.
+     */
+    public function testLoadDataCreatesCategories(): void
     {
         $manager = $this->createMock(ObjectManager::class);
 
@@ -21,17 +32,17 @@ class CategoryFixturesTest extends TestCase
         $manager->expects($this->once())
             ->method('flush');
 
-        // Tworzymy instancję fixture
+        // Create fixture instance
         $fixture = new CategoryFixtures();
 
-        // Mock ReferenceRepository i przypisanie do chronionego pola referenceRepository
+        // Mock ReferenceRepository and assign to protected referenceRepository property
         $referenceRepository = $this->createMock(ReferenceRepository::class);
         $reflection = new \ReflectionClass($fixture);
         $property = $reflection->getParentClass()->getProperty('referenceRepository');
         $property->setAccessible(true);
         $property->setValue($fixture, $referenceRepository);
 
-        // Teraz wywołujemy load(), wszystko powinno działać
+        // Call load(), should work without errors
         $fixture->load($manager);
     }
 }

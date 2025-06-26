@@ -1,4 +1,9 @@
 <?php
+/**
+ * CategoryService test cases.
+ *
+ * @license MIT
+ */
 
 namespace App\Tests\Service;
 
@@ -13,9 +18,17 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Security;
 use Doctrine\ORM\QueryBuilder;
 
+/**
+ * Class CategoryServiceTest.
+ *
+ * Unit tests for the CategoryService class.
+ */
 class CategoryServiceTest extends TestCase
 {
-    public function testSaveSetsTimestamps()
+    /**
+     * Test that save() sets createdAt and updatedAt timestamps.
+     */
+    public function testSaveSetsTimestamps(): void
     {
         $category = new Category();
 
@@ -35,7 +48,10 @@ class CategoryServiceTest extends TestCase
         $this->assertInstanceOf(\DateTimeImmutable::class, $category->getUpdatedAt());
     }
 
-    public function testCanBeDeletedWhenNoPosts()
+    /**
+     * Test that a category can be deleted when it has no posts.
+     */
+    public function testCanBeDeletedWhenNoPosts(): void
     {
         $category = new Category();
 
@@ -52,7 +68,10 @@ class CategoryServiceTest extends TestCase
         $this->assertTrue($service->canBeDeleted($category));
     }
 
-    public function testCanBeDeletedWhenException()
+    /**
+     * Test that an exception during post count returns false for deletion check.
+     */
+    public function testCanBeDeletedWhenException(): void
     {
         $category = new Category();
 
@@ -69,6 +88,9 @@ class CategoryServiceTest extends TestCase
         $this->assertFalse($service->canBeDeleted($category));
     }
 
+    /**
+     * Test paginated list retrieval from CategoryService.
+     */
     public function testGetPaginatedList(): void
     {
         $queryBuilder = $this->createMock(QueryBuilder::class);
@@ -86,19 +108,19 @@ class CategoryServiceTest extends TestCase
             ->with($queryBuilder, 1, PostRepository::PAGINATOR_ITEMS_PER_PAGE)
             ->willReturn($paginationMock);
 
-        $postRepository = $this->createMock(PostRepository::class);
-        $security = $this->createMock(Security::class);
-
         $service = new CategoryService(
             $categoryRepository,
-            $postRepository,
+            $this->createMock(PostRepository::class),
             $paginator,
-            $security
+            $this->createMock(Security::class)
         );
 
         $this->assertSame($paginationMock, $service->getPaginatedList(1));
     }
 
+    /**
+     * Test delete() deletes the category if it can be deleted.
+     */
     public function testDeleteWhenCategoryCanBeDeleted(): void
     {
         $category = new Category();
@@ -121,6 +143,9 @@ class CategoryServiceTest extends TestCase
         $this->assertTrue($service->delete($category));
     }
 
+    /**
+     * Test delete() does not delete the category if it cannot be deleted.
+     */
     public function testDeleteWhenCategoryCannotBeDeleted(): void
     {
         $category = new Category();

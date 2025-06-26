@@ -1,4 +1,9 @@
 <?php
+/**
+ * CategoryType test cases.
+ *
+ * @license MIT
+ */
 
 namespace App\Tests\Form\Type;
 
@@ -6,8 +11,16 @@ use App\Entity\Category;
 use App\Form\Type\CategoryType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
+/**
+ * Class CategoryTypeTest.
+ *
+ * Test cases for the CategoryType form.
+ */
 class CategoryTypeTest extends TypeTestCase
 {
+    /**
+     * Test submitting valid data to the form.
+     */
     public function testSubmitValidData(): void
     {
         $formData = [
@@ -33,6 +46,9 @@ class CategoryTypeTest extends TypeTestCase
         $this->assertArrayHasKey('title', $children);
     }
 
+    /**
+     * Test configureOptions method sets data_class correctly.
+     */
     public function testConfigureOptions(): void
     {
         $formType = new CategoryType();
@@ -45,6 +61,9 @@ class CategoryTypeTest extends TypeTestCase
         $this->assertSame(Category::class, $options['data_class']);
     }
 
+    /**
+     * Test getBlockPrefix returns expected string.
+     */
     public function testGetBlockPrefix(): void
     {
         $formType = new CategoryType();

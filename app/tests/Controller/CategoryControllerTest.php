@@ -1,4 +1,9 @@
 <?php
+/**
+ * Category controller tests.
+ *
+ * @license MIT
+ */
 
 namespace App\Tests\Controller;
 
@@ -16,6 +21,9 @@ class CategoryControllerTest extends WebTestCase
     private $client;
     private $entityManager;
 
+    /**
+     * Set up test environment.
+     */
     protected function setUp(): void
     {
         $this->client = static::createClient();
@@ -23,20 +31,26 @@ class CategoryControllerTest extends WebTestCase
         $this->logInAdminUser();
     }
 
+    /**
+     * Test index page.
+     */
     public function testIndex(): void
     {
         $crawler = $this->client->request('GET', '/category');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Lista kategorii'); // title.category_list
+        $this->assertSelectorTextContains('h1', 'Lista kategorii');
     }
 
+    /**
+     * Test creating a category.
+     */
     public function testCreateCategory(): void
     {
         $crawler = $this->client->request('GET', '/category/create');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Utworz Kategorie'); // title.category_create
+        $this->assertSelectorTextContains('h1', 'Utworz Kategorie');
 
         $form = $crawler->selectButton('Zapisz')->form();
         $form['category[title]'] = 'Nowa Kategoria';
@@ -45,12 +59,15 @@ class CategoryControllerTest extends WebTestCase
         $this->assertResponseRedirects('/category');
 
         $this->client->followRedirect();
-        $this->assertSelectorExists('.alert-success'); // flash message po sukcesie
+        $this->assertSelectorExists('.alert-success');
 
         $category = $this->entityManager->getRepository(Category::class)->findOneBy(['title' => 'Nowa Kategoria']);
         $this->assertNotNull($category);
     }
 
+    /**
+     * Test editing a category.
+     */
     public function testEditCategory(): void
     {
         $category = new Category();
@@ -76,6 +93,9 @@ class CategoryControllerTest extends WebTestCase
         $this->assertSame('Zmieniona Kategoria', $updatedCategory->getTitle());
     }
 
+    /**
+     * Test deleting a category.
+     */
     public function testDeleteCategory(): void
     {
         $category = new Category();
@@ -102,6 +122,30 @@ class CategoryControllerTest extends WebTestCase
         $this->assertNull($deletedCategory);
     }
 
+    /**
+     * Test showing a category.
+     */
+    public function testShowCategory(): void
+    {
+        $category = new Category();
+        $category->setTitle('officiis');
+        $category->setSlug('officiis');
+        $category->setCreatedAt(new \DateTimeImmutable());
+        $category->setUpdatedAt(new \DateTimeImmutable());
+
+        $this->entityManager->persist($category);
+        $this->entityManager->flush();
+
+        $crawler = $this->client->request('GET', '/category/'.$category->getId());
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('body', 'Szczegoly kategorii');
+        $this->assertSelectorTextContains('body', 'officiis');
+    }
+
+    /**
+     * Log in test admin user.
+     */
     private function logInAdminUser(): void
     {
         $hasher = static::getContainer()->get(UserPasswordHasherInterface::class);

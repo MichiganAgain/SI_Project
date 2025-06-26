@@ -1,4 +1,9 @@
 <?php
+/**
+ * Post controller tests.
+ *
+ * @license MIT
+ */
 
 namespace App\Tests\Controller;
 
@@ -17,6 +22,9 @@ class PostControllerTest extends WebTestCase
     private $client;
     private $entityManager;
 
+    /**
+     * Set up test environment.
+     */
     protected function setUp(): void
     {
         $this->client = static::createClient();
@@ -24,14 +32,20 @@ class PostControllerTest extends WebTestCase
         $this->logInAdminUser();
     }
 
+    /**
+     * Test index page for posts.
+     */
     public function testIndex(): void
     {
         $crawler = $this->client->request('GET', '/post');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorExists('h1'); // Możesz doprecyzować, jeśli h1 zawiera konkretny tytuł
+        $this->assertSelectorExists('h1');
     }
 
+    /**
+     * Test creating a new post.
+     */
     public function testCreatePost(): void
     {
         $category = new Category();
@@ -39,12 +53,14 @@ class PostControllerTest extends WebTestCase
         $category->setSlug('testowa-kategoria');
         $category->setCreatedAt(new \DateTimeImmutable());
         $category->setUpdatedAt(new \DateTimeImmutable());
+
         $this->entityManager->persist($category);
         $this->entityManager->flush();
 
         $crawler = $this->client->request('GET', '/post/create');
+
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Utworz'); // zamiast "Utwórz post"
+        $this->assertSelectorTextContains('h1', 'Utworz');
 
         $form = $crawler->selectButton('Zapisz')->form([
             'post[title]' => 'Nowy post',
@@ -62,6 +78,9 @@ class PostControllerTest extends WebTestCase
         $this->assertNotNull($post);
     }
 
+    /**
+     * Test editing a post.
+     */
     public function testEditPost(): void
     {
         $category = new Category();
@@ -83,6 +102,7 @@ class PostControllerTest extends WebTestCase
         $this->entityManager->flush();
 
         $crawler = $this->client->request('GET', '/post/'.$post->getId().'/edit');
+
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', 'Edytuj Post');
 
@@ -99,6 +119,9 @@ class PostControllerTest extends WebTestCase
         $this->assertSame('Zmieniony post', $updatedPost->getTitle());
     }
 
+    /**
+     * Test deleting a post.
+     */
     public function testDeletePost(): void
     {
         $category = new Category();
@@ -120,13 +143,14 @@ class PostControllerTest extends WebTestCase
         $this->entityManager->flush();
 
         $crawler = $this->client->request('GET', '/post/'.$post->getId().'/delete');
+
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', 'Jestes pewien?');
 
         $form = $crawler->selectButton('Usun')->form();
         $this->client->submit($form);
-        $this->assertResponseRedirects('/post');
 
+        $this->assertResponseRedirects('/post');
         $this->client->followRedirect();
         $this->assertSelectorExists('.alert-success');
 
@@ -134,6 +158,9 @@ class PostControllerTest extends WebTestCase
         $this->assertNull($deletedPost);
     }
 
+    /**
+     * Log in admin user.
+     */
     private function logInAdminUser(): void
     {
         $hasher = static::getContainer()->get(UserPasswordHasherInterface::class);
@@ -153,6 +180,11 @@ class PostControllerTest extends WebTestCase
         $this->client->loginUser($user);
     }
 
+    /**
+     * Get test admin user.
+     *
+     * @return User|null returns user or null if not found
+     */
     private function getUser(): ?User
     {
         return $this->entityManager->getRepository(User::class)->findOneBy(['email' => 'admin@example.com']);

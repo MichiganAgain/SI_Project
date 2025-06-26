@@ -1,4 +1,9 @@
 <?php
+/**
+ * Category controller tests.
+ *
+ * @license MIT
+ */
 
 namespace App\Tests\Controller;
 
@@ -15,21 +20,30 @@ class SecurityControllerTest extends WebTestCase
     private $client;
     private $entityManager;
 
+    /**
+     * Setup client and entity manager.
+     */
     protected function setUp(): void
     {
         $this->client = static::createClient();
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
     }
 
+    /**
+     * Test that login page loads successfully.
+     */
     public function testLoginPageIsSuccessful(): void
     {
         $crawler = $this->client->request('GET', '/login');
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('form');
-        $this->assertSelectorTextContains('h1', 'Zaloguj Sie'); // or "Zaloguj sie" if that's your translation
+        $this->assertSelectorTextContains('h1', 'Zaloguj Sie');
     }
 
+    /**
+     * Test login attempt with invalid credentials.
+     */
     public function testLoginWithInvalidCredentials(): void
     {
         $crawler = $this->client->request('GET', '/login');
@@ -40,12 +54,17 @@ class SecurityControllerTest extends WebTestCase
         ]);
 
         $this->client->submit($form);
+
         $this->assertResponseRedirects('/login');
 
         $this->client->followRedirect();
+
         $this->assertSelectorExists('.alert-danger');
     }
 
+    /**
+     * Test login with valid credentials.
+     */
     public function testLoginWithValidCredentials(): void
     {
         $user = $this->createUser('loginuser@example.com', 'testpass');
@@ -58,13 +77,22 @@ class SecurityControllerTest extends WebTestCase
         ]);
 
         $this->client->submit($form);
-        $this->assertResponseRedirects(); // default route or homepage
 
-        // Optional: follow redirect and assert user is logged in
+        $this->assertResponseRedirects();
+
         $this->client->followRedirect();
+
         $this->assertSelectorTextContains('.navbar-brand', 'Witaj TestUser!');
     }
 
+    /**
+     * Helper method to create a user in the database.
+     *
+     * @param string $email    user email address
+     * @param string $password user password
+     *
+     * @return User created user entity
+     */
     private function createUser(string $email, string $password): User
     {
         $hasher = static::getContainer()->get(UserPasswordHasherInterface::class);

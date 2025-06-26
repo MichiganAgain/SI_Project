@@ -1,4 +1,9 @@
 <?php
+/**
+ * UserService test cases.
+ *
+ * @license MIT
+ */
 
 namespace App\Tests\Service;
 
@@ -11,18 +16,23 @@ use Knp\Component\Pager\PaginatorInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Security;
 use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 
+/**
+ * Class UserServiceTest.
+ *
+ * Unit tests for the UserService class.
+ */
 class UserServiceTest extends TestCase
 {
-    public function testSaveCallsUserRepository()
+    /**
+     * Test that save() calls the UserRepository::save() method.
+     */
+    public function testSaveCallsUserRepository(): void
     {
         $user = new User();
 
         $userRepository = $this->createMock(UserRepository::class);
-        $userRepository->expects($this->once())
-            ->method('save')
-            ->with($user);
+        $userRepository->expects($this->once())->method('save')->with($user);
 
         $service = new UserService(
             $userRepository,
@@ -34,14 +44,15 @@ class UserServiceTest extends TestCase
         $service->save($user);
     }
 
-    public function testEditCallsUserRepository()
+    /**
+     * Test that edit() calls the UserRepository::edit() method.
+     */
+    public function testEditCallsUserRepository(): void
     {
         $user = new User();
 
         $userRepository = $this->createMock(UserRepository::class);
-        $userRepository->expects($this->once())
-            ->method('edit')
-            ->with($user);
+        $userRepository->expects($this->once())->method('edit')->with($user);
 
         $service = new UserService(
             $userRepository,
@@ -53,14 +64,15 @@ class UserServiceTest extends TestCase
         $service->edit($user);
     }
 
-    public function testDeleteUserWhenCanBeDeleted()
+    /**
+     * Test that delete() removes a user when they have no posts.
+     */
+    public function testDeleteUserWhenCanBeDeleted(): void
     {
         $user = new User();
 
         $userRepository = $this->createMock(UserRepository::class);
-        $userRepository->expects($this->once())
-            ->method('remove')
-            ->with($user);
+        $userRepository->expects($this->once())->method('remove')->with($user);
 
         $postRepository = $this->createMock(PostRepository::class);
         $postRepository->method('countByUser')->willReturn(0);
@@ -75,7 +87,10 @@ class UserServiceTest extends TestCase
         $this->assertTrue($service->delete($user));
     }
 
-    public function testDeleteUserWhenCannotBeDeleted()
+    /**
+     * Test that delete() does not remove a user when they have posts.
+     */
+    public function testDeleteUserWhenCannotBeDeleted(): void
     {
         $user = new User();
 
@@ -95,7 +110,10 @@ class UserServiceTest extends TestCase
         $this->assertFalse($service->delete($user));
     }
 
-    public function testCanBeDeletedWhenNoPosts()
+    /**
+     * Test that canBeDeleted() returns true when no posts exist.
+     */
+    public function testCanBeDeletedWhenNoPosts(): void
     {
         $user = new User();
 
@@ -112,7 +130,10 @@ class UserServiceTest extends TestCase
         $this->assertTrue($service->canBeDeleted($user));
     }
 
-    public function testCanBeDeletedWhenPostsExist()
+    /**
+     * Test that canBeDeleted() returns false when posts exist.
+     */
+    public function testCanBeDeletedWhenPostsExist(): void
     {
         $user = new User();
 
@@ -129,7 +150,10 @@ class UserServiceTest extends TestCase
         $this->assertFalse($service->canBeDeleted($user));
     }
 
-    public function testCanBeDeletedWhenExceptionThrown()
+    /**
+     * Test that canBeDeleted() returns false when an exception is thrown.
+     */
+    public function testCanBeDeletedWhenExceptionThrown(): void
     {
         $user = new User();
 
@@ -146,7 +170,10 @@ class UserServiceTest extends TestCase
         $this->assertFalse($service->canBeDeleted($user));
     }
 
-    public function testGetPaginatedListReturnsPagination()
+    /**
+     * Test that getPaginatedList() returns a PaginationInterface instance.
+     */
+    public function testGetPaginatedListReturnsPagination(): void
     {
         $queryBuilder = $this->createMock(\Doctrine\ORM\QueryBuilder::class);
 

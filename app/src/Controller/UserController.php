@@ -6,11 +6,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\Type\DeleteFormType;
 use App\Form\Type\UserType;
 use App\Service\UserServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -175,7 +175,7 @@ class UserController extends AbstractController
     #[IsGranted('DELETE', subject: 'user')]
     public function delete(Request $request, User $user): Response
     {
-        $form = $this->createForm(FormType::class, $user, [
+        $form = $this->createForm(DeleteFormType::class, $user, [
             'method' => 'DELETE',
             'action' => $this->generateUrl('user_delete', ['id' => $user->getId()]),
         ]);

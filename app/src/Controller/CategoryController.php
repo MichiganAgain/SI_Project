@@ -7,10 +7,10 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\Type\CategoryType;
+use App\Form\Type\DeleteFormType;
 use App\Service\CategoryServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -175,7 +175,7 @@ class CategoryController extends AbstractController
     #[IsGranted('DELETE', subject: 'category')]
     public function delete(Request $request, Category $category): Response
     {
-        $form = $this->createForm(FormType::class, $category, [
+        $form = $this->createForm(DeleteFormType::class, $category, [
             'method' => 'DELETE',
             'action' => $this->generateUrl('category_delete', ['id' => $category->getId()]),
         ]);

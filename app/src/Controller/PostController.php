@@ -7,12 +7,10 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Entity\User;
+use App\Form\Type\DeleteFormType;
 use App\Form\Type\PostType;
 use App\Service\PostServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use App\Repository\PostRepository;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,20 +23,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route('/post')]
 class PostController extends AbstractController
 {
-    /**
-     * Post repository.
-     *
-     * @var PostRepository PostRepository
-     */
-    private PostRepository $postRepository;
-
-    /**
-     * Paginator.
-     *
-     * @var PaginatorInterface PaginatorInterface
-     */
-    private PaginatorInterface $paginator;
-
     /**
      * Post service.
      */
@@ -198,7 +182,7 @@ class PostController extends AbstractController
     public function delete(Request $request, Post $post): Response
     {
         $form = $this->createForm(
-            FormType::class,
+            DeleteFormType::class,
             $post,
             [
                 'method' => 'DELETE',
